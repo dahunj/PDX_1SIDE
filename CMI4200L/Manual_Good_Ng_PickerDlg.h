@@ -1,22 +1,22 @@
-// ManualPickerDlg.h : 헤더 파일
+// Manual_Good_Ng_PickerDlg.h : 헤더 파일
 //
 #pragma once
 
-// CManualPickerDlg 대화 상자입니다.
+// CManual_Good_Ng_PickerDlg 대화 상자입니다.
 
-class CManualPickerDlg : public CDialogEx
+class CManual_Good_Ng_PickerDlg : public CDialogEx
 {
-	DECLARE_DYNAMIC(CManualPickerDlg)
+	DECLARE_DYNAMIC(CManual_Good_Ng_PickerDlg)
 
 public:
-	CManualPickerDlg(CWnd* pParent = NULL);   // 표준 생성자입니다.
-	virtual ~CManualPickerDlg();
+	CManual_Good_Ng_PickerDlg(CWnd* pParent = NULL);   // 표준 생성자입니다.
+	virtual ~CManual_Good_Ng_PickerDlg();
 
 	// 대화 상자 데이터입니다.
 	enum { IDD = IDD_MANUAL_GOOD_NG_PICKER_DLG };
 	CStaticCS	m_stcAxisPos[5];
 
-	CButtonCS	m_btnGoodPickerX[2];
+	
 	CButtonCS	m_btnGoodPickerY[6];
 	CButtonCS	m_btnGoodPickerZ[2];
 
@@ -39,8 +39,8 @@ public:
 	CButtonCS	m_btnNGPickIO[24];
 	CLedCS		m_ledNGPickIO[20];
 
-	CStaticCS	m_stcPickerMove[4];
-	CButtonCS	m_btnGoodPickMove;
+
+
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
@@ -68,8 +68,8 @@ protected:
 	afx_msg void OnBtnNGPickIOClick(UINT nID);
 
 	afx_msg void OnBtnGoodPickMoveClick();
-	afx_msg void OnBtnGoodPickMovePosClick(UINT nID);
-	afx_msg void OnBnClickedBtnGoodPicker4Move2();
+
+
 
 private:
 	double dCurrentX;

@@ -452,14 +452,14 @@ void CAJinAXL::Save_RmsMotionSpeed(int nAxis, double dSpeed)
 void CAJinAXL::Status_Monitoring()
 {
 	int	nIndexPos=0;
-	if      (!m_DX2.iInspCMAlignCheck1 && !m_DX2.iInspCMAlignCheck2 && !m_DX2.iInspCMAlignCheck3) nIndexPos = 1;
-	else if ( m_DX2.iInspCMAlignCheck1 && !m_DX2.iInspCMAlignCheck2 && !m_DX2.iInspCMAlignCheck3) nIndexPos = 2;
-	else if (!m_DX2.iInspCMAlignCheck1 &&  m_DX2.iInspCMAlignCheck2 && !m_DX2.iInspCMAlignCheck3) nIndexPos = 3;
-	else if ( m_DX2.iInspCMAlignCheck1 &&  m_DX2.iInspCMAlignCheck2 && !m_DX2.iInspCMAlignCheck3) nIndexPos = 4;
-	else if (!m_DX2.iInspCMAlignCheck1 && !m_DX2.iInspCMAlignCheck2 &&  m_DX2.iInspCMAlignCheck3) nIndexPos = 5;
-	else if ( m_DX2.iInspCMAlignCheck1 && !m_DX2.iInspCMAlignCheck2 &&  m_DX2.iInspCMAlignCheck3) nIndexPos = 6;
-	else if (!m_DX2.iInspCMAlignCheck1 &&  m_DX2.iInspCMAlignCheck2 &&  m_DX2.iInspCMAlignCheck3) nIndexPos = 7;
-	else if ( m_DX2.iInspCMAlignCheck1 &&  m_DX2.iInspCMAlignCheck2 &&  m_DX2.iInspCMAlignCheck3) nIndexPos = 8;
+	if      (!m_DX2.iIndexPosPin1 && !m_DX2.iIndexPosPin2 && !m_DX2.iIndexPosPin3) nIndexPos = 1;
+	else if ( m_DX2.iIndexPosPin1 && !m_DX2.iIndexPosPin2 && !m_DX2.iIndexPosPin3) nIndexPos = 2;
+	else if (!m_DX2.iIndexPosPin1 &&  m_DX2.iIndexPosPin2 && !m_DX2.iIndexPosPin3) nIndexPos = 3;
+	else if ( m_DX2.iIndexPosPin1 &&  m_DX2.iIndexPosPin2 && !m_DX2.iIndexPosPin3) nIndexPos = 4;
+	else if (!m_DX2.iIndexPosPin1 && !m_DX2.iIndexPosPin2 &&  m_DX2.iIndexPosPin3) nIndexPos = 5;
+	else if ( m_DX2.iIndexPosPin1 && !m_DX2.iIndexPosPin2 &&  m_DX2.iIndexPosPin3) nIndexPos = 6;
+	else if (!m_DX2.iIndexPosPin1 &&  m_DX2.iIndexPosPin2 &&  m_DX2.iIndexPosPin3) nIndexPos = 7;
+	else if ( m_DX2.iIndexPosPin1 &&  m_DX2.iIndexPosPin2 &&  m_DX2.iIndexPosPin3) nIndexPos = 8;
 
 	if (gData.nIndexPos == 8 && nIndexPos != 8) gData.nIndexPos = 0;
 	if (gData.nIndexPos < nIndexPos) gData.nIndexPos = nIndexPos;

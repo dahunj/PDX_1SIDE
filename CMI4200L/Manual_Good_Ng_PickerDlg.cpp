@@ -1,8 +1,8 @@
-// ManualPickerDlg.cpp : 구현 파일입니다.
+// Manual_Good_Ng_PickerDlg.cpp : 구현 파일입니다.
 //
 #include "stdafx.h"
 #include "CMI4200L.h"
-#include "ManualPickerDlg.h"
+#include "Manual_Good_Ng_PickerDlg.h"
 #include "afxdialogex.h"
 
 #include "AJinAXL.h"
@@ -12,26 +12,30 @@
 #include "ManualDlg.h"
 #include "Math.h"
 
-// CManualPickerDlg 대화 상자입니다.
+// CManual_Good_Ng_PickerDlg 대화 상자입니다.
 
-IMPLEMENT_DYNAMIC(CManualPickerDlg, CDialogEx)
+IMPLEMENT_DYNAMIC(CManual_Good_Ng_PickerDlg, CDialogEx)
 
-CManualPickerDlg::CManualPickerDlg(CWnd* pParent /*=NULL*/)
-	: CDialogEx(CManualPickerDlg::IDD, pParent)
+CManual_Good_Ng_PickerDlg::CManual_Good_Ng_PickerDlg(CWnd* pParent /*=NULL*/)
+	: CDialogEx(CManual_Good_Ng_PickerDlg::IDD, pParent)
 {
 }
 
-CManualPickerDlg::~CManualPickerDlg()
+CManual_Good_Ng_PickerDlg::~CManual_Good_Ng_PickerDlg()
 {
 }
 
-void CManualPickerDlg::DoDataExchange(CDataExchange* pDX)
+void CManual_Good_Ng_PickerDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	for (int i = 0; i < 5; i++) DDX_Control(pDX, IDC_STC_AXIS_POS_0 + i, m_stcAxisPos[i]);
-
+	
+	DDX_Control(pDX, IDC_STC_AXIS_POS_1, m_stcAxisPos[1]);
+	DDX_Control(pDX, IDC_STC_AXIS_POS_2, m_stcAxisPos[2]);
+	DDX_Control(pDX, IDC_STC_AXIS_POS_3, m_stcAxisPos[3]);
+	DDX_Control(pDX, IDC_STC_AXIS_POS_4, m_stcAxisPos[4]);
+	
 	//CMI3000
-	for (int i = 0; i < 2; i++) DDX_Control(pDX,  IDC_BTN_PICKER_X_0 + i, m_btnGoodPickerX[i]);
+	
 	for (int i = 0; i < 2; i++) DDX_Control(pDX,  IDC_BTN_PICKER_Y_0 + i, m_btnGoodPickerY[i]);
 	DDX_Control(pDX,  IDC_BTN_PICKER_Y_2, m_btnGoodPickerY[2]);
 	DDX_Control(pDX,  IDC_BTN_PICKER_Y_3, m_btnGoodPickerY[3]);
@@ -149,21 +153,14 @@ void CManualPickerDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_LED_NG_PICKER_IO1_18, m_ledNGPickIO[18]);
 	DDX_Control(pDX, IDC_LED_NG_PICKER_IO1_19, m_ledNGPickIO[19]);
 
-	DDX_Control(pDX, IDC_STC_GMOVE_0, m_stcPickerMove[0]);
-	DDX_Control(pDX, IDC_STC_GMOVE_1, m_stcPickerMove[1]);
-	DDX_Control(pDX, IDC_STC_GMOVE_2, m_stcPickerMove[2]);
-	DDX_Control(pDX, IDC_STC_GMOVE_3, m_stcPickerMove[3]);
-
-	DDX_Control(pDX, IDC_BTN_GOOD_PICKER4_MOVE, m_btnGoodPickMove);
-
+	
 }
 
-BEGIN_MESSAGE_MAP(CManualPickerDlg, CDialogEx)
+BEGIN_MESSAGE_MAP(CManual_Good_Ng_PickerDlg, CDialogEx)
 	ON_WM_DESTROY()
 	ON_WM_SHOWWINDOW()
 
-	//CIM3000L
-	ON_CONTROL_RANGE(BN_CLICKED, IDC_BTN_PICKER_X_0, IDC_BTN_PICKER_X_1, OnBtnPickerXClick)
+	//CIM3000L	
 	ON_CONTROL_RANGE(BN_CLICKED, IDC_BTN_PICKER_Y_0, IDC_BTN_PICKER_Y_1, OnBtnPickerYClick)
 	ON_CONTROL_RANGE(BN_CLICKED, IDC_BTN_PICKER_Y_2, IDC_BTN_PICKER_Y_2, OnBtnPickerYClick)
 	ON_CONTROL_RANGE(BN_CLICKED, IDC_BTN_PICKER_Y_3, IDC_BTN_PICKER_Y_3, OnBtnPickerYClick)
@@ -182,11 +179,6 @@ BEGIN_MESSAGE_MAP(CManualPickerDlg, CDialogEx)
 	ON_CONTROL_RANGE(BN_CLICKED, IDC_BTN_GOOD_PICKER_1, IDC_BTN_GOOD_PICKER_1, OnBtnPickerAClick)
 	ON_CONTROL_RANGE(BN_CLICKED, IDC_BTN_GOOD_PICKER_2, IDC_BTN_GOOD_PICKER_2, OnBtnPickerAClick)
 	ON_CONTROL_RANGE(BN_CLICKED, IDC_BTN_GOOD_PICKER_3, IDC_BTN_GOOD_PICKER_3, OnBtnPickerAClick)
-
-	ON_CONTROL_RANGE(BN_CLICKED, IDC_STC_GMOVE_0, IDC_STC_GMOVE_0, OnBtnGoodPickMovePosClick)
-	ON_CONTROL_RANGE(BN_CLICKED, IDC_STC_GMOVE_1, IDC_STC_GMOVE_1, OnBtnGoodPickMovePosClick)
-	ON_CONTROL_RANGE(BN_CLICKED, IDC_STC_GMOVE_2, IDC_STC_GMOVE_2, OnBtnGoodPickMovePosClick)
-	ON_CONTROL_RANGE(BN_CLICKED, IDC_STC_GMOVE_3, IDC_STC_GMOVE_3, OnBtnGoodPickMovePosClick)
 
 	ON_CONTROL_RANGE(BN_CLICKED, IDC_BTN_NG_PICKER_X_0, IDC_BTN_NG_PICKER_X_0, OnBtnNGPickXClick)
 	ON_CONTROL_RANGE(BN_CLICKED, IDC_BTN_NG_PICKER_X_1, IDC_BTN_NG_PICKER_X_1, OnBtnNGPickXClick)
@@ -222,13 +214,12 @@ BEGIN_MESSAGE_MAP(CManualPickerDlg, CDialogEx)
 	ON_CONTROL_RANGE(BN_CLICKED, IDC_BTN_NG_PICKER_IO1_22, IDC_BTN_NG_PICKER_IO1_22, OnBtnNGPickIOClick)
 	ON_CONTROL_RANGE(BN_CLICKED, IDC_BTN_NG_PICKER_IO1_23, IDC_BTN_NG_PICKER_IO1_23, OnBtnNGPickIOClick)
 
-	ON_BN_CLICKED(IDC_BTN_GOOD_PICKER4_MOVE, &CManualPickerDlg::OnBtnGoodPickMoveClick)
-	ON_BN_CLICKED(IDC_BTN_GOOD_PICKER4_MOVE2, &CManualPickerDlg::OnBnClickedBtnGoodPicker4Move2)
+
 END_MESSAGE_MAP()
 
-// CManualPickerDlg 메시지 처리기입니다.
+// CManual_Good_Ng_PickerDlg 메시지 처리기입니다.
 
-BOOL CManualPickerDlg::OnInitDialog() 
+BOOL CManual_Good_Ng_PickerDlg::OnInitDialog() 
 {
 	CDialogEx::OnInitDialog();
 
@@ -260,12 +251,12 @@ BOOL CManualPickerDlg::OnInitDialog()
 	// 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
 }
 
-void CManualPickerDlg::OnDestroy() 
+void CManual_Good_Ng_PickerDlg::OnDestroy() 
 {
 	CDialogEx::OnDestroy();
 }
 
-BOOL CManualPickerDlg::PreTranslateMessage(MSG* pMsg) 
+BOOL CManual_Good_Ng_PickerDlg::PreTranslateMessage(MSG* pMsg) 
 {
 	if ((pMsg->message == WM_KEYDOWN) && (pMsg->wParam == VK_RETURN || pMsg->wParam == VK_ESCAPE))
 		return TRUE;
@@ -273,7 +264,7 @@ BOOL CManualPickerDlg::PreTranslateMessage(MSG* pMsg)
 	return CDialogEx::PreTranslateMessage(pMsg);
 }
 
-void CManualPickerDlg::OnShowWindow(BOOL bShow, UINT nStatus) 
+void CManual_Good_Ng_PickerDlg::OnShowWindow(BOOL bShow, UINT nStatus) 
 {
 	CDialogEx::OnShowWindow(bShow, nStatus);
 
@@ -283,66 +274,8 @@ void CManualPickerDlg::OnShowWindow(BOOL bShow, UINT nStatus)
 }
 
 
-void CManualPickerDlg::OnBtnPickerXClick(UINT nID)
-{
-	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
-	DX_DATA_4 *pDX4 = pAJinAXL->Get_pDX4();
-	CCommon *pCommon = CCommon::Get_Instance();
 
-	if (!pCommon->Check_MainDoor()) return;
-	if (!pAJinAXL->Is_Home(AX_GOOD_PICKER_Y)) return;
-
-#ifdef PICKER_3
-	if (!pDX4->iGoodPicker1Up || !pDX4->iGoodPicker2Up || !pDX4->iGoodPicker3Up || 
-		pDX4->iGoodPicker1Down || pDX4->iGoodPicker2Down || pDX4->iGoodPicker3Down )
-#endif
-#ifdef PICKER_5
-	if (!pDX4->iGoodPicker1Up || !pDX4->iGoodPicker2Up || !pDX4->iGoodPicker3Up || 
-		!pDX4->iGoodPicker4Up || !pDX4->iGoodPicker5Up ||
-		pDX4->iGoodPicker1Down || pDX4->iGoodPicker2Down || pDX4->iGoodPicker3Down || 
-		pDX4->iGoodPicker4Down || pDX4->iGoodPicker5Down ) 
-#endif
-#ifdef PICKER_6
-	if (!pDX4->iGoodPicker1Up || !pDX4->iGoodPicker2Up || !pDX4->iGoodPicker3Up || 
-		!pDX4->iGoodPicker4Up || !pDX4->iGoodPicker5Up || !pDX4->iGoodPicker6Up ||
-		pDX4->iGoodPicker1Down || pDX4->iGoodPicker2Down || pDX4->iGoodPicker3Down || 
-		pDX4->iGoodPicker4Down || pDX4->iGoodPicker5Down || pDX4->iGoodPicker6Down) 
-#endif
-	{
-		AfxMessageBox(_T("Good Picker Up후 진행하세요............."));
-		return;
-	}
-
-	int ID = nID - IDC_BTN_PICKER_X_0;
-
-	switch( ID )
-	{
-	case 0:		// Load
-		if (pCommon->Check_Position(AX_GOOD_PICKER_Z, 0) ) 
-		{
-			pCommon->Move_Position(AX_GOOD_PICKER_Y, ID);
-		}
-		break;
-	case 1:		// Unload
-		if (pCommon->Check_Position(AX_GOOD_PICKER_Z, 1) ) 
-		{
-			pCommon->Move_Position(AX_GOOD_PICKER_Y, ID);
-		}
-		break;
-	case 2:		// Pitch Move
-		if (pCommon->Check_Position(AX_GOOD_PICKER_Z, 1) ) 
-		{
-			pCommon->Move_Position(AX_GOOD_PICKER_Y, ID);
-		}
-		break;
-	default:
-		break;
-
-	}
-
-}
-
-void CManualPickerDlg::OnBtnPickerYClick(UINT nID)
+void CManual_Good_Ng_PickerDlg::OnBtnPickerYClick(UINT nID)
 {
 	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
 	DX_DATA_4 *pDX4 = pAJinAXL->Get_pDX4();
@@ -388,11 +321,11 @@ void CManualPickerDlg::OnBtnPickerYClick(UINT nID)
 
 	CString sLog;
 	CLogFile *pLogFile = CLogFile::Get_Instance();
-	sLog.Format("[Manual Mode] CManualPickerDlg.OnBtnPickerYClick.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
+	sLog.Format("[Manual Mode] CManual_Good_Ng_PickerDlg.OnBtnPickerYClick.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
 	pLogFile->Save_HandlerLog(sLog);
 }
 
-void CManualPickerDlg::OnBtnPickerZClick(UINT nID)
+void CManual_Good_Ng_PickerDlg::OnBtnPickerZClick(UINT nID)
 {
 	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
 	CCommon *pCommon = CCommon::Get_Instance();
@@ -408,11 +341,11 @@ void CManualPickerDlg::OnBtnPickerZClick(UINT nID)
 
 	CString sLog;
 	CLogFile *pLogFile = CLogFile::Get_Instance();
-	sLog.Format("[Manual Mode] CManualPickerDlg.OnBtnPickerZClick.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
+	sLog.Format("[Manual Mode] CManual_Good_Ng_PickerDlg.OnBtnPickerZClick.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
 	pLogFile->Save_HandlerLog(sLog);
 }
 
-void CManualPickerDlg::OnBtnNGPickXClick(UINT nID)
+void CManual_Good_Ng_PickerDlg::OnBtnNGPickXClick(UINT nID)
 {
 	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
 	CCommon *pCommon = CCommon::Get_Instance();
@@ -456,11 +389,11 @@ void CManualPickerDlg::OnBtnNGPickXClick(UINT nID)
 
 	CString sLog;
 	CLogFile *pLogFile = CLogFile::Get_Instance();
-	sLog.Format("[Manual Mode] CManualPickerDlg.OnBtnNGPickXClick.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
+	sLog.Format("[Manual Mode] CManual_Good_Ng_PickerDlg.OnBtnNGPickXClick.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
 	pLogFile->Save_HandlerLog(sLog);
 }
 
-void CManualPickerDlg::OnBtnNGPickZClick(UINT nID)
+void CManual_Good_Ng_PickerDlg::OnBtnNGPickZClick(UINT nID)
 {
 	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
 	CCommon *pCommon = CCommon::Get_Instance();
@@ -478,11 +411,11 @@ void CManualPickerDlg::OnBtnNGPickZClick(UINT nID)
 
 	CString sLog;
 	CLogFile *pLogFile = CLogFile::Get_Instance();
-	sLog.Format("[Manual Mode] CManualPickerDlg.OnBtnNGPickZClick.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
+	sLog.Format("[Manual Mode] CManual_Good_Ng_PickerDlg.OnBtnNGPickZClick.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
 	pLogFile->Save_HandlerLog(sLog);
 }
 
-void CManualPickerDlg::OnBtnNGPickIOClick(UINT nID)
+void CManual_Good_Ng_PickerDlg::OnBtnNGPickIOClick(UINT nID)
 {
 	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
 	DX_DATA_2 *pDX2 = pAJinAXL->Get_pDX2();
@@ -679,11 +612,11 @@ void CManualPickerDlg::OnBtnNGPickIOClick(UINT nID)
 
 	CString sLog;
 	CLogFile *pLogFile = CLogFile::Get_Instance();
-	sLog.Format("[Manual Mode] CManualPickerDlg.OnBtnNGPickIOClick.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
+	sLog.Format("[Manual Mode] CManual_Good_Ng_PickerDlg.OnBtnNGPickIOClick.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
 	pLogFile->Save_HandlerLog(sLog);
 }
 
-void CManualPickerDlg::OnBtnPicker1Click(UINT nID)
+void CManual_Good_Ng_PickerDlg::OnBtnPicker1Click(UINT nID)
 {
 	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
 	DX_DATA_2 *pDX2 = pAJinAXL->Get_pDX2();
@@ -721,11 +654,11 @@ void CManualPickerDlg::OnBtnPicker1Click(UINT nID)
 
 	CString sLog;
 	CLogFile *pLogFile = CLogFile::Get_Instance();
-	sLog.Format("[Manual Mode] CManualPickerDlg.OnBtnPicker1Click.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
+	sLog.Format("[Manual Mode] CManual_Good_Ng_PickerDlg.OnBtnPicker1Click.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
 	pLogFile->Save_HandlerLog(sLog);
 }
 
-void CManualPickerDlg::OnBtnPicker2Click(UINT nID)
+void CManual_Good_Ng_PickerDlg::OnBtnPicker2Click(UINT nID)
 {
 	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
 	DX_DATA_2 *pDX2 = pAJinAXL->Get_pDX2();
@@ -763,11 +696,11 @@ void CManualPickerDlg::OnBtnPicker2Click(UINT nID)
 
 	CString sLog;
 	CLogFile *pLogFile = CLogFile::Get_Instance();
-	sLog.Format("[Manual Mode] CManualPickerDlg.OnBtnPicker2Click.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
+	sLog.Format("[Manual Mode] CManual_Good_Ng_PickerDlg.OnBtnPicker2Click.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
 	pLogFile->Save_HandlerLog(sLog);
 }
 
-void CManualPickerDlg::OnBtnPicker3Click(UINT nID)
+void CManual_Good_Ng_PickerDlg::OnBtnPicker3Click(UINT nID)
 {
 	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
 	DX_DATA_2 *pDX2 = pAJinAXL->Get_pDX2();
@@ -805,11 +738,11 @@ void CManualPickerDlg::OnBtnPicker3Click(UINT nID)
 
 	CString sLog;
 	CLogFile *pLogFile = CLogFile::Get_Instance();
-	sLog.Format("[Manual Mode] CManualPickerDlg.OnBtnPicker3Click.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
+	sLog.Format("[Manual Mode] CManual_Good_Ng_PickerDlg.OnBtnPicker3Click.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
 	pLogFile->Save_HandlerLog(sLog);
 }
 
-void CManualPickerDlg::OnBtnPicker4Click(UINT nID)
+void CManual_Good_Ng_PickerDlg::OnBtnPicker4Click(UINT nID)
 {
 	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
 	DX_DATA_2 *pDX2 = pAJinAXL->Get_pDX2();
@@ -847,11 +780,11 @@ void CManualPickerDlg::OnBtnPicker4Click(UINT nID)
 
 	CString sLog;
 	CLogFile *pLogFile = CLogFile::Get_Instance();
-	sLog.Format("[Manual Mode] CManualPickerDlg.OnBtnPicker4Click.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
+	sLog.Format("[Manual Mode] CManual_Good_Ng_PickerDlg.OnBtnPicker4Click.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
 	pLogFile->Save_HandlerLog(sLog);
 }
 
-void CManualPickerDlg::OnBtnPicker5Click(UINT nID)
+void CManual_Good_Ng_PickerDlg::OnBtnPicker5Click(UINT nID)
 {
 	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
 	DX_DATA_2 *pDX2 = pAJinAXL->Get_pDX2();
@@ -889,11 +822,11 @@ void CManualPickerDlg::OnBtnPicker5Click(UINT nID)
 
 	CString sLog;
 	CLogFile *pLogFile = CLogFile::Get_Instance();
-	sLog.Format("[Manual Mode] CManualPickerDlg.OnBtnPicker5Click.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
+	sLog.Format("[Manual Mode] CManual_Good_Ng_PickerDlg.OnBtnPicker5Click.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
 	pLogFile->Save_HandlerLog(sLog);
 }
 
-void CManualPickerDlg::OnBtnPicker6Click(UINT nID)
+void CManual_Good_Ng_PickerDlg::OnBtnPicker6Click(UINT nID)
 {
 	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
 	DX_DATA_2 *pDX2 = pAJinAXL->Get_pDX2();
@@ -931,11 +864,11 @@ void CManualPickerDlg::OnBtnPicker6Click(UINT nID)
 
 	CString sLog;
 	CLogFile *pLogFile = CLogFile::Get_Instance();
-	sLog.Format("[Manual Mode] CManualPickerDlg.OnBtnPicker6Click.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
+	sLog.Format("[Manual Mode] CManual_Good_Ng_PickerDlg.OnBtnPicker6Click.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
 	pLogFile->Save_HandlerLog(sLog);
 }
 
-void CManualPickerDlg::OnBtnPickerAClick(UINT nID)
+void CManual_Good_Ng_PickerDlg::OnBtnPickerAClick(UINT nID)
 {
 	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
 	DX_DATA_2 *pDX2 = pAJinAXL->Get_pDX2();
@@ -1072,7 +1005,7 @@ void CManualPickerDlg::OnBtnPickerAClick(UINT nID)
 
 	CString sLog;
 	CLogFile *pLogFile = CLogFile::Get_Instance();
-	sLog.Format("[Manual Mode] CManualPickerDlg.OnBtnPickerAClick.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
+	sLog.Format("[Manual Mode] CManual_Good_Ng_PickerDlg.OnBtnPickerAClick.  LotID[%s] CM[%d] Data[%d]", gData.sLotID, gData.nCMJobCount, nID);
 	pLogFile->Save_HandlerLog(sLog);
 }
 
@@ -1080,10 +1013,10 @@ void CManualPickerDlg::OnBtnPickerAClick(UINT nID)
 ///////////////////////////////////////////////////////////////////////////////
 // User Functions
 
-void CManualPickerDlg::Initial_Controls() 
+void CManual_Good_Ng_PickerDlg::Initial_Controls() 
 {
 
-	for (int i = 0; i < 5; i++) m_stcAxisPos[i].Init_Ctrl("바탕", 11, TRUE, RGB(0xFF, 0xFF, 0xFF), RGB(0x00, 0x10, 0xB0));
+	for (int i = 1; i < 5; i++) m_stcAxisPos[i].Init_Ctrl("바탕", 11, TRUE, RGB(0xFF, 0xFF, 0xFF), RGB(0x00, 0x10, 0xB0));
 /*
 	for (int i = 0; i < 3; i++) m_btnGoodPickerX[i].Init_Ctrl("바탕", 11, TRUE, COLOR_DEFAULT, COLOR_DEFAULT, 0, 0);
 	for (int i = 0; i < 5; i++) m_btnGoodPickerY[i].Init_Ctrl("바탕", 11, TRUE, COLOR_DEFAULT, COLOR_DEFAULT, 0, 0);
@@ -1113,7 +1046,7 @@ void CManualPickerDlg::Initial_Controls()
 #endif
 }
 
-void CManualPickerDlg::Display_Status()
+void CManual_Good_Ng_PickerDlg::Display_Status()
 {
 
 	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
@@ -1291,335 +1224,3 @@ void CManualPickerDlg::Display_Status()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-void CManualPickerDlg::OnBtnGoodPickMovePosClick(UINT nID)
-{
-
- 	int ID; 
-	CCommon *pCommon = CCommon::Get_Instance();
-	CString strOld, strNew;
-
-	if (nID == IDC_STC_GMOVE_0) 
-	{
-		ID = 0;
-	}
-
-	if (nID == IDC_STC_GMOVE_1) 
-	{
-		ID = 1;
-	}
-
-	if (nID == IDC_STC_GMOVE_2) 
-	{
-		ID = 2;
-	}
-	if (nID == IDC_STC_GMOVE_3) 
-	{
-		ID = 3;
-	}
-
-	m_stcPickerMove[ID].GetWindowText(strOld);
-	if (pCommon->Show_NumPad(strOld, strNew) == IDOK) {
-		m_stcPickerMove[ID].SetWindowText(strNew);
-	}
-
-}
-void CManualPickerDlg::OnBtnGoodPickMoveClick()
-{
-/*
-	CString sTmp[4];
-	int xx, yy, zz;
-
-	for(int i = 0; i< 4; i++){
-		m_stcPickerMove[i].GetWindowText(sTmp[i]);
-	}
-
-	if(sTmp[0] != "1" && sTmp[0] != "2" && sTmp[0] != "3" && sTmp[0] != "4"){
-		AfxMessageBox(_T("Picker Type (1~4) 입력 Error..................."));
-		return;
-	}
-
-	zz = atoi(sTmp[1]);	//No
-	xx = atoi(sTmp[2]);	//x
-	yy = atoi(sTmp[3]);	//y
-
-	if(xx < 1 || yy > 6){
-		AfxMessageBox(_T("Tray Array X 입력(1~6) Error..................."));
-		return;
-	}
-	if(yy < 1 || yy > 6){
-		AfxMessageBox(_T("Tray Array Y 입력(1~6) Error..................."));
-		return;
-	}
-	if(zz < 1 || zz > 6){
-		AfxMessageBox(_T("Picker No (1~6) 입력 Error..................."));
-		return;
-	}
-
-	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
-	CCommon *pCommon = CCommon::Get_Instance();
-	DX_DATA_3 *pDX3 = pAJinAXL->Get_pDX3();
-	DX_DATA_4 *pDX4 = pAJinAXL->Get_pDX4();
-
-	if(sTmp[0] == "1" || sTmp[0] == "2") {
-		if (!pDX4->iGoodPicker1Up || !pDX4->iGoodPicker2Up || !pDX4->iGoodPicker3Up || 
-			!pDX4->iGoodPicker4Up || !pDX4->iGoodPicker5Up || !pDX4->iGoodPicker6Up ||
-			pDX4->iGoodPicker1Down || pDX4->iGoodPicker2Down || pDX4->iGoodPicker3Down || 
-			pDX4->iGoodPicker4Down || pDX4->iGoodPicker5Down || pDX4->iGoodPicker6Down ) {
-			AfxMessageBox(_T("Good Picker Up후 진행하세요............."));
-			return;
-		}
-	}
-	if(sTmp[0] == "3" || sTmp[0] == "4") {
-		if (!pDX3->iNGPicker1Up || !pDX3->iNGPicker2Up || !pDX3->iNGPicker3Up ||
-			pDX3->iNGPicker1Down || pDX3->iNGPicker2Down || pDX3->iNGPicker3Down ) {
-			AfxMessageBox(_T("NG Picker Z Up후에 진행하세요....."));
-			return;
-		}
-		if (!pCommon->Check_Position(AX_NG_PICKER_Z, 0)) {
-			AfxMessageBox(_T("NG Picker Z Ready Position 위치후에 진행하세요....."));
-			return;
-		}
-	}
-
-	CString sLog;
-	if(sTmp[0] == "1"){ //Good Up
-		if(xx != 1){
-			AfxMessageBox(_T("Tray Array X 입력(1) Error..................."));
-			return;
-		}
-
-		pCommon->PickerGood_Move(1, zz, yy);
-
-		pAJinAXL->Move_Absolute(AX_GOOD_PICKER_Y, pCommon->m_dP4Y);
-		sLog.Format("dy Position[%0.3lf], dz Position[%0.3lf]", pCommon->m_dP4Y,  pCommon->m_dP4Z);
-	} 
-	if(sTmp[0] == "2"){	//Good Down
-		if(xx != 1){
-			AfxMessageBox(_T("Tray Array X 입력(1) Error..................."));
-			return;
-		}
-
-		pCommon->PickerGood_Move(2, zz, yy);
-		
-		pAJinAXL->Move_Absolute(AX_GOOD_PICKER_Y, pCommon->m_dP4Y);
-		sLog.Format("dy Position[%0.3lf], dz Position[%0.3lf]", pCommon->m_dP4Y,  pCommon->m_dP4Z);
-	} 
-	if(sTmp[0] == "3"){	//NG Up
-		if(zz < 1 || zz > 2){
-			AfxMessageBox(_T("Picker No (1~2) 입력 Error..................."));
-			return;
-		}
-//		if(yy != 1){
-//			AfxMessageBox(_T("Tray Array Y 입력(1) Error..................."));
-//			return;
-//		}
-
-		pCommon->PickerNG_UpMove(zz, xx);
-		pAJinAXL->Move_Absolute(AX_NG_PICKER_X, pCommon->m_dP3X);
-		sLog.Format("dx Position[%0.3lf], dz Position[%0.3lf]", pCommon->m_dP3X,  pCommon->m_dP3Z);
-	} 
-	if(sTmp[0] == "4"){	//NG Down
-		if(zz < 1 || zz > 2){
-			AfxMessageBox(_T("Picker No (1~2) 입력 Error..................."));
-			return;
-		}
-
-		pCommon->PickerNG_DnMove(zz, xx, yy, 1);
-		pAJinAXL->Move_Absolute(AX_NG_STAGE_Y, pCommon->m_dP3Y);
-		pAJinAXL->Move_Absolute(AX_NG_PICKER_X, pCommon->m_dP3X);
-		sLog.Format("dx Position[%0.3lf], dy Position[%0.3lf]", pCommon->m_dP3X,  pCommon->m_dP3Y);
-	} 
-
-	AfxMessageBox(_T(sLog));;
-*/
-/* 1호기
-	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
-	DX_DATA_3 *pDX3 = pAJinAXL->Get_pDX3();
-
-	double dX, dY, dLineX, dLineY;
-	CString sTmp[4];
-	int xx, yy, zz;
-	double dDegree, dScaleX,dScaleY;
-
-	if (!pDX3->iGoodPick1ZUp || !pDX3->iGoodPick2ZUp || !pDX3->iGoodPick3ZUp ||
-	    !pDX3->iGoodPick4ZUp || !pDX3->iGoodPick5ZUp || !pDX3->iGoodPick6ZUp) {
-		AfxMessageBox(_T("Picker Cylinder Down Check....................."));
-		return;
-	}
-
-	CDataManager *pDataManager = CDataManager::Get_Instance();
-	MODEL_DATA *pModelData = pDataManager->Get_pModelData();
-	EQUIP_DATA *pEquipData = pDataManager->Get_pEquipData();
-	MOVE_DATA *pMoveData = pDataManager->Get_pMoveData();
-	pDataManager->Read_ModelData();
-	pDataManager->Read_EquipData();
-
-	for(int i = 0; i< 4; i++){
-		m_stcPickerMove[i].GetWindowText(sTmp[i]);
-	}
-	
-	if(sTmp[0] == "1"){	//empty move
-		dLineX = pMoveData->dGoodPickerX[1]; 
-		dLineY = pMoveData->dGoodPickerY[1]; 
-		dDegree = gData.dStageTheta[4];
-		dScaleX = gData.dTrayOffSet[4][0];
-		dScaleY = gData.dTrayOffSet[4][1];
-	} else if(sTmp[0] == "2"){	//good move
-		dLineX = pMoveData->dGoodPickerX[2]; 
-		dLineY = pMoveData->dGoodPickerY[2]; 
-		dDegree = gData.dStageTheta[5];
-		dScaleX = gData.dTrayOffSet[5][0];
-		dScaleY = gData.dTrayOffSet[5][1];
-	} else {
-		AfxMessageBox(_T("Picker Position 입력 Error..................."));
-		return;
-	}
-	xx = atoi(sTmp[2])-1;
-	yy = atoi(sTmp[3])-1;
-	zz = atoi(sTmp[1])-1;
-
-	dX = (dLineX + ((pModelData->dPitchL * dScaleX) * xx));// - gData.dNGPickerOffSetX[zz]);
-	dY = (dLineY + ((pModelData->dPitchW * dScaleY) * yy));// - gData.dNGPickerOffSetY[zz]);
-
-	dCurrentX = cos(dDegree*3.14159/180)*(dX - dLineX) - sin(dDegree*3.14159/180)*(dY - dLineY) + dLineX - gData.dGoodPickerOffSetX[zz];
-	dCurrentY = sin(dDegree*3.14159/180)*(dX - dLineX) + cos(dDegree*3.14159/180)*(dY - dLineY) + dLineY - gData.dGoodPickerOffSetY[zz];
-
-
-	pAJinAXL->Move_Absolute(AX_GOOD_PICKER_X, dCurrentX);
-	pAJinAXL->Move_Absolute(AX_GOOD_PICKER_Y, dCurrentY);
-
-	CString sLog;
-	sLog.Format("dx[%0.3lf] dy[%0.3lf] degree[%0.3lf] dXn[%0.3lf] dYn[%0.3lf]", dX, dY, dDegree, dCurrentX, dCurrentY);
-	AfxMessageBox(_T(sLog));
-*/
-}
-
-
-void CManualPickerDlg::OnBnClickedBtnGoodPicker4Move2()
-{
-/*
-	CString sTmp[4];
-	int xx, yy, zz;
-
-	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
-	CCommon *pCommon = CCommon::Get_Instance();
-
-	for(int i = 0; i< 4; i++){
-		m_stcPickerMove[i].GetWindowText(sTmp[i]);
-	}
-
-	if(sTmp[0] != "1" && sTmp[0] != "2" && sTmp[0] != "3" && sTmp[0] != "4"){
-		AfxMessageBox(_T("Picker Type (1~4) 입력 Error..................."));
-		return;
-	}
-
-	zz = atoi(sTmp[1]);	//No
-	xx = atoi(sTmp[2]);	//x
-	yy = atoi(sTmp[3]);	//y
-
-	if(xx < 1 || yy > 6){
-		AfxMessageBox(_T("Tray Array X 입력(1~6) Error..................."));
-		return;
-	}
-	if(yy < 1 || yy > 6){
-		AfxMessageBox(_T("Tray Array Y 입력(1~6) Error..................."));
-		return;
-	}
-	if(zz < 1 || zz > 6){
-		AfxMessageBox(_T("Picker No (1~6) 입력 Error..................."));
-		return;
-	}
-
-	CString sLog;
-	if(sTmp[0] == "1"){ //Good Up
-		if(xx != 1){
-			AfxMessageBox(_T("Tray Array X 입력(1) Error..................."));
-			return;
-		}
-
-		pCommon->PickerGood_Move(1, zz, yy);
-
-		pAJinAXL->Move_Absolute(AX_GOOD_PICKER_Z, pCommon->m_dP4Z);
-		sLog.Format("dy Position[%0.3lf], dz Position[%0.3lf]", pCommon->m_dP4Y,  pCommon->m_dP4Z);
-	} 
-	if(sTmp[0] == "2"){	//Good Down
-		if(xx != 1){
-			AfxMessageBox(_T("Tray Array X 입력(1) Error..................."));
-			return;
-		}
-
-		pCommon->PickerGood_Move(2, zz, yy);
-		
-		pAJinAXL->Move_Absolute(AX_GOOD_PICKER_Z, pCommon->m_dP4Z);
-		sLog.Format("dy Position[%0.3lf], dz Position[%0.3lf]", pCommon->m_dP4Y,  pCommon->m_dP4Z);
-	} 
-	if(sTmp[0] == "3"){	//NG Up
-		if(zz < 1 || zz > 2){
-			AfxMessageBox(_T("Picker No (1~2) 입력 Error..................."));
-			return;
-		}
-//		if(yy != 1){
-//			AfxMessageBox(_T("Tray Array Y 입력(1) Error..................."));
-//			return;
-//		}
-
-		pCommon->PickerNG_UpMove(zz, xx);
-		pAJinAXL->Move_Absolute(AX_NG_PICKER_Z, pCommon->m_dP3Z);
-		sLog.Format("dx Position[%0.3lf], dz Position[%0.3lf]", pCommon->m_dP3X,  pCommon->m_dP3Z);
-	} 
-	if(sTmp[0] == "4"){	//NG Down
-		if(zz < 1 || zz > 2){
-			AfxMessageBox(_T("Picker No (1~2) 입력 Error..................."));
-			return;
-		}
-
-		pCommon->PickerNG_DnMove(zz, xx, yy, 1);
-		sLog.Format("dx Position[%0.3lf], dy Position[%0.3lf], dz Position[%0.3lf]", pCommon->m_dP3X,  pCommon->m_dP3Y, pCommon->m_dP3Z);
-		pAJinAXL->Move_Absolute(AX_NG_PICKER_Z, pCommon->m_dP3Z);
-	} 
-
-	AfxMessageBox(_T(sLog));
-*/
-/*
-	double dX, dY, dZ;
-	CString sTmp[4];
-	int xx, yy, zz, pp, kk;
-	double dA, dB, dC, dD, dLineX, dLineY, dDegree, dScaleX,dScaleY;
-
-	dLineX = pMoveData->dGoodPickerX[kk]; 
-	dLineY = pMoveData->dGoodPickerY[kk]; 
-	dDegree = gData.dStageTheta[pp];
-	dScaleX = gData.dTrayOffSet[pp][0];
-	dScaleY = gData.dTrayOffSet[pp][1];
-
-	dX = (dLineX + ((pModelData->dPitchL * dScaleX) * xx));// - gData.dNGPickerOffSetX[zz]);
-	dY = (dLineY + ((pModelData->dPitchW * dScaleY) * yy));// - gData.dNGPickerOffSetY[zz]);
-	
-	dCurrentX = cos(dDegree*3.14159/180)*(dX - dLineX) - sin(dDegree*3.14159/180)*(dY - dLineY) + dLineX - gData.dGoodPickerOffSetX[0];
-	dCurrentY = sin(dDegree*3.14159/180)*(dX - dLineX) + cos(dDegree*3.14159/180)*(dY - dLineY) + dLineY - gData.dGoodPickerOffSetY[0];
-
-	dA =  (gData.dTZ[pp][1][1] - gData.dTZ[pp][1][0])*(gData.dTZ[pp][2][2] - gData.dTZ[pp][2][0]) - 
-		  (gData.dTZ[pp][2][1] - gData.dTZ[pp][2][0])*(gData.dTZ[pp][1][2] - gData.dTZ[pp][1][0]);
-
-	dB =  (gData.dTZ[pp][2][1] - gData.dTZ[pp][2][0])*(gData.dTZ[pp][0][2] - gData.dTZ[pp][0][0]) - 
-		  (gData.dTZ[pp][0][1] - gData.dTZ[pp][0][0])*(gData.dTZ[pp][2][2] - gData.dTZ[pp][2][0]);
-
-	dC =  (gData.dTZ[pp][0][1] - gData.dTZ[pp][0][0])*(gData.dTZ[pp][1][2] - gData.dTZ[pp][1][0]) - 
-		  (gData.dTZ[pp][1][1] - gData.dTZ[pp][1][0])*(gData.dTZ[pp][0][2] - gData.dTZ[pp][0][0]);
-
-	dD = -1*dA*gData.dTZ[pp][0][0] - dB*gData.dTZ[pp][1][0] - dC*gData.dTZ[pp][2][0];
-
-	dZ = (-dD - dA*dCurrentX - dB*dCurrentY)/dC;
-
-	dZ = dZ +  (pMoveData->dGoodPickerZ[kk] - gData.dTZ[pp][2][0]) - gData.dGoodPickerOffSetZ[zz];
-
-	pAJinAXL->Move_Absolute(AX_GOOD_PICKER_Z, dZ);
-
-	CString sLog;
-	sLog.Format("dx[%0.3lf] dy[%0.3lf] degree[%0.3lf] dXn[%0.3lf] dYn[%0.3lf] dZ[%0.3lf] Offset[%0.3lf]", dX, dY, dDegree, dCurrentX, dCurrentY, dZ, gData.dNGPickerOffSetZ[zz]);
-	AfxMessageBox(_T(sLog));
-*/
-}
-
-

@@ -1790,7 +1790,7 @@ BOOL CSequenceInit::Initial_Simulation()
 	if (m_nInitUnload1Case == 114) { pAJinAXL->Move_Absolute(AX_UNLOAD_TRAY_Y1, 0.0); pAJinAXL->Move_Absolute(AX_UNLOAD_TRAY_Y2, 0.0); }
 	if (m_nInitUnload1Case == 115) { pAJinAXL->Move_Absolute(AX_UNLOAD_TRAY_Z1, 0.0); pAJinAXL->Move_Absolute(AX_UNLOAD_TRAY_Z2, 0.0); }
 	if (m_nInitUnload2Case == 0) { }
-	if (m_nInitIndexTCase == 133) { pDX2->iInspCMAlignCheck1 = FALSE; pDX2->iInspCMAlignCheck2 = FALSE; pDX2->iInspCMAlignCheck3 = FALSE; }
+	if (m_nInitIndexTCase == 133) { pDX2->iIndexPosPin1 = FALSE; pDX2->iIndexPosPin2 = FALSE; pDX2->iIndexPosPin3 = FALSE; }
 	if (m_nInitLDPickerCase == 0) { }
 	if (m_nInitNGPickerCase == 0) { }
 	if (m_nInitGDPickerCase == 0) { }

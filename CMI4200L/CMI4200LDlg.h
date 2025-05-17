@@ -15,7 +15,6 @@
 #include "Common.h"
 #include "Inspector.h"
 #include "LogFile.h"
-#include "ManualLotDataDlg.h"
 #include "SequenceInit.h"
 #include "SequenceMain.h"
 #include "OperatorDlg.h"

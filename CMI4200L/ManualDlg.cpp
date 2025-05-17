@@ -54,7 +54,7 @@ void CManualDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_RDO_MANUAL_DOOR_UNLOCK, m_rdoManualDoorUnlock);
 
 	
-	DDX_Control(pDX, IDC_RDO_MANUAL_PICKER2, m_rdoManualPicker2);
+	
 	DDX_Control(pDX, IDC_RDO_MANUAL_ELEVATOR2, m_rdoManualElevator2);
 }
 
@@ -69,8 +69,7 @@ BEGIN_MESSAGE_MAP(CManualDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_RDO_MANUAL_INSPECTOR, &CManualDlg::OnBnClickedRdoManualInspector)
 	ON_BN_CLICKED(IDC_RDO_MANUAL_DOOR_LOCK, &CManualDlg::OnBnClickedRdoManualDoorLock)
 	ON_BN_CLICKED(IDC_RDO_MANUAL_DOOR_UNLOCK, &CManualDlg::OnBnClickedRdoManualDoorUnlock)
-
-	ON_BN_CLICKED(IDC_RDO_MANUAL_PICKER2, &CManualDlg::OnBnClickedRdoManualPicker2)
+		
 	ON_BN_CLICKED(IDC_RDO_MANUAL_ELEVATOR2, &CManualDlg::OnBnClickedRdoManualElevator2)
 END_MESSAGE_MAP()
 
@@ -87,22 +86,22 @@ BOOL CManualDlg::OnInitDialog()
 
 	
 
-	m_pManualInspectorDlg = new CManualInspectorDlg(this);
+	m_pManualInspectorDlg = new CManual_InspectorDlg(this);
 	m_pManualInspectorDlg->Create(IDD_MANUAL_INSPECTOR_DLG, this);
 
-	m_pManualPickerDlg = new CManualPickerDlg(this);
+	m_pManualPickerDlg = new CManual_Good_Ng_PickerDlg(this);
 	m_pManualPickerDlg->Create(IDD_MANUAL_GOOD_NG_PICKER_DLG, this);
 
-	m_pManualUnloadDlg = new CManualUnloadDlg(this);
+	m_pManualUnloadDlg = new CManual_UnloadingDlg(this);
 	m_pManualUnloadDlg->Create(IDD_MANUAL_UNLOAD_DLG, this);
 
-	m_pManualLoadPickerDlg = new CManualLoadPickerDlg(this);
+	m_pManualLoadPickerDlg = new CManual_LoadPickerDlg(this);
 	m_pManualLoadPickerDlg->Create(IDD_MANUAL_LOADPICKER_DLG, this);
 
-	m_pManualPicker3Dlg = new CManualPicker3Dlg(this);
-	m_pManualPicker3Dlg->Create(IDD_MANUAL_PICKER3_DLG, this);	
+	m_pManualPicker3Dlg = new CManual_Unload_PickerDlg(this);
+	m_pManualPicker3Dlg->Create(IDD_MANUAL_UNLOAD_PICKER_DLG, this);	
 
-	m_pManualLoadingDlg = new CManualLoadingDlg(this);
+	m_pManualLoadingDlg = new CManual_LoadingDlg(this);
 	m_pManualLoadingDlg->Create(IDD_MANUAL_LOADING_DLG, this);
 
 	// Inspector Dlg Visible
@@ -294,10 +293,6 @@ void CManualDlg::OnBnClickedRdoManualInspector()
 
 
 
-void CManualDlg::OnBnClickedRdoManualPicker2()
-{
-	
-}
 
 void CManualDlg::OnBnClickedRdoManualElevator2()
 {
@@ -362,7 +357,7 @@ void CManualDlg::Initial_Controls()
 //	m_rdoManualDoorUnlock.Init_Ctrl("πŸ≈¡", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
 
 	m_rdoManualElevator2.Init_Ctrl("πŸ≈¡", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);	
-	m_rdoManualPicker2.Init_Ctrl("πŸ≈¡", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
+	
 }
 
 void CManualDlg::Hide_Windows()
@@ -379,7 +374,6 @@ void CManualDlg::Hide_Windows()
 	m_rdoManualGripper.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
 	m_rdoManualPicker.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
 	m_rdoManualElevator2.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);	
-	m_rdoManualPicker2.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
 	m_rdoManualInspector.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
 
 }

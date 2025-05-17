@@ -1,21 +1,21 @@
-// ManualInspectorDlg.h : 헤더 파일
+// Manual_InspectorDlg.h : 헤더 파일
 //
 #pragma once
 
 // CManualElevatorDlg 대화 상자입니다.
 
-class CManualInspectorDlg : public CDialogEx
+class CManual_InspectorDlg : public CDialogEx
 {
-	DECLARE_DYNAMIC(CManualInspectorDlg)
+	DECLARE_DYNAMIC(CManual_InspectorDlg)
 
 public:
-	CManualInspectorDlg(CWnd* pParent = NULL);   // 표준 생성자입니다.
-	virtual ~CManualInspectorDlg();
+	CManual_InspectorDlg(CWnd* pParent = NULL);   // 표준 생성자입니다.
+	virtual ~CManual_InspectorDlg();
 
 	// 대화 상자 데이터입니다.
 	enum { IDD = IDD_MANUAL_INSPECTOR_DLG };
 	CStaticCS	m_stcAxisPos[6];
-	CButtonCS	m_btnVisionY[8];
+	CButtonCS	m_btnVisionY[1];
 	CButtonCS	m_btnVisionA[1];
 	CButtonCS	m_btnVisionZ[2];
 	CButtonCS	m_btnBarcodeA[1];

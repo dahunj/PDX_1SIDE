@@ -2,13 +2,12 @@
 //
 #pragma once
 
-#include "ManualInspectorDlg.h"
-#include "ManualPickerDlg.h"
-#include "ManualUnloadDlg.h"
-#include "ManualPicker2Dlg.h"
-#include "ManualPicker3Dlg.h"
-#include "ManualLotDataDlg.h"
-#include "ManualLoadingDlg.h"
+#include "Manual_InspectorDlg.h"
+#include "Manual_Good_Ng_PickerDlg.h"
+#include "Manual_UnloadingDlg.h"
+#include "Manual_LoadPickerDlg.h"
+#include "Manual_Unload_PickerDlg.h"
+#include "Manual_LoadingDlg.h"
 
 // CManualDlg 대화 상자입니다.
 
@@ -38,7 +37,7 @@ public:
 	CRadioCS	m_rdoManualDoorLock;
 	CRadioCS	m_rdoManualDoorUnlock;
 	
-	CRadioCS	m_rdoManualPicker2;
+	
 	CRadioCS	m_rdoManualElevator2;
 
 protected:
@@ -57,18 +56,17 @@ protected:
 	afx_msg void OnBnClickedRdoManualDoorLock();
 	afx_msg void OnBnClickedRdoManualDoorUnlock();
 
-	afx_msg void OnBnClickedRdoManualPicker2();
 	afx_msg void OnBnClickedRdoManualElevator2();
 
 public:
 	
 
-	CManualLoadingDlg	*m_pManualLoadingDlg;
-	CManualInspectorDlg	*m_pManualInspectorDlg;
-	CManualPickerDlg	*m_pManualPickerDlg;
-	CManualUnloadDlg	*m_pManualUnloadDlg;
-	CManualLoadPickerDlg	*m_pManualLoadPickerDlg;
-	CManualPicker3Dlg	*m_pManualPicker3Dlg;
+	CManual_LoadingDlg	*m_pManualLoadingDlg;
+	CManual_InspectorDlg	*m_pManualInspectorDlg;
+	CManual_Good_Ng_PickerDlg	*m_pManualPickerDlg;
+	CManual_UnloadingDlg	*m_pManualUnloadDlg;
+	CManual_LoadPickerDlg	*m_pManualLoadPickerDlg;
+	CManual_Unload_PickerDlg	*m_pManualPicker3Dlg;
 	
 private:
 	void Initial_Controls();

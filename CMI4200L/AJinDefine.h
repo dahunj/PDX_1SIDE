@@ -196,9 +196,9 @@ typedef union tag_DX_DATA_2 {
 		DWORD iInspCMAlign4Out: 1;			// X226
 		DWORD iInspVacuumUp: 1;				// X227
 		DWORD iInspVacuumDown: 1;			// X228
-		DWORD iInspCMAlignCheck1: 1;		// X229
-		DWORD iInspCMAlignCheck2: 1;		// X230
-		DWORD iInspCMAlignCheck3: 1;		// X231
+		DWORD iIndexPosPin1: 1;		// X229
+		DWORD iIndexPosPin2: 1;		// X230
+		DWORD iIndexPosPin3: 1;		// X231
 
 	};
 } DX_DATA_2;	// Digital Input 2
