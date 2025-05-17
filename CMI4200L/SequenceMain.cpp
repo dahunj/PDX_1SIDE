@@ -5969,6 +5969,15 @@ BOOL CSequenceMain::Check_InspecEnd(int nPos)
 
 BOOL CSequenceMain::Check_IndexNGJobExist()
 {
+	if(gData.bUseAllPass)
+	{
+		for(int l=0; l<gData.nPickCnt; l++) 
+		{
+			gData.IndexInfo[2][l] = 1;
+		}
+		return FALSE;
+	}
+
 	for(int l=0; l<gData.nPickCnt; l++) {
 		if (gData.IndexInfo[2][l] >= 2) return TRUE;
 	}
