@@ -436,6 +436,8 @@ void CWorkDlg::OnTimer(UINT_PTR nIDEvent)
 
 			pMainDlg->Set_LotErrorLog("STOP", 904, "Stop");
 
+			g_objMES.Set_Status(3);
+
 		} else {				// Stop
 			// Auto Start
 			if (!gData.m_bErrorShow) {
