@@ -34,7 +34,7 @@ public:
 	// 대화 상자 데이터입니다.
 	enum { IDD = IDD_WORK_DLG };
 	CGroupCS		m_Group[9];
-	CLabelCS		m_Label[46];
+	CLabelCS		m_Label[46];	
 	CLabelCS		m_LabelDoor;
 	CStaticCS		m_stcModelName;
 	CStaticCS		m_stcStripSize;
@@ -71,6 +71,7 @@ public:
 	CLedStatic		m_ledIndexSlot[5][6];
 	CLedCS			m_ledBarAlarm;
 	CLedCS			m_ledBarNG;
+	CLedCS			m_ledBarVision;
 	CCheckCS		m_chkMESUse;
 	CCheckCS		m_chkAllPass;
 	CGridCS			m_grdShiftList;

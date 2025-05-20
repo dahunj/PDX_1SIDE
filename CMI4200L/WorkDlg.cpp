@@ -56,6 +56,7 @@ void CWorkDlg::DoDataExchange(CDataExchange* pDX)
 	for (int i = 4; i <= 6; i++) DDX_Control(pDX, IDC_GROUP_0 + i, m_Group[i]);
 	for (int i = 0; i <= 2; i++) DDX_Control(pDX, IDC_LABEL_0 + i, m_Label[i]);
 	for (int i = 6; i <= 9; i++) DDX_Control(pDX, IDC_LABEL_0 + i, m_Label[i]);
+	for (int i = 10; i <= 10; i++) DDX_Control(pDX, IDC_LABEL_0 + i, m_Label[i]);
 	for (int i = 19; i < 39; i++) DDX_Control(pDX, IDC_LABEL_0 + i, m_Label[i]);
 	DDX_Control(pDX, IDC_LABEL_3, m_Label[3]);
 	DDX_Control(pDX, IDC_LABEL_4, m_Label[4]);
@@ -175,6 +176,7 @@ void CWorkDlg::DoDataExchange(CDataExchange* pDX)
 
 	DDX_Control(pDX, IDC_LED_BAR_ALARM, m_ledBarAlarm);
 	DDX_Control(pDX, IDC_LED_BAR_ALARM2, m_ledBarNG);
+	DDX_Control(pDX, IDC_LED_BAR_VISION, m_ledBarVision);
 	DDX_Control(pDX, IDC_GRD_SHIFT_LIST, m_grdShiftList);
 	DDX_Control(pDX, IDC_BTN_BUZZER_OFF, m_btnBuzzerOff);
 	DDX_Control(pDX, IDC_BTN_LOT_CANCEL, m_btnLotCancel);
@@ -842,6 +844,9 @@ void CWorkDlg::Initial_Controls()
 	m_chkMESUse.Init_Ctrl("Arial", 12, TRUE, RGB(0xFF, 0xFF, 0x00), RGB(0xC0, 0x10, 0x30), CCheckCS::emRed, CCheckCS::emRight);
 	m_chkAllPass.Init_Ctrl("Arial", 12, TRUE, RGB(0xFF, 0xFF, 0x00), RGB(0xC0, 0x10, 0x30), CCheckCS::emRed, CCheckCS::emRight);
 	
+	m_Label[10].Init_Ctrl("¹ÙÅÁ", 10, FALSE, RGB(0xFF, 0xFF, 0xFF), RGB(0x40, 0x00, 0x80));
+	m_ledBarVision.Init_Ctrl("¹ÙÅÁ", 11, FALSE, COLOR_DEFAULT, COLOR_DEFAULT, CLedCS::emGreen, CLedCS::em16);
+
 	Initial_ShiftGrid();
 }
 
@@ -1004,6 +1009,12 @@ void CWorkDlg::Display_Status()
 	//if(gData.bUseBar2NG) m_ledBarNG.Set_On(TRUE);
 	if(gData.bUseDoorLock) m_ledBarNG.Set_On(TRUE);
 	else				 m_ledBarNG.Set_On(FALSE);
+
+
+	CDataManager *pDataManager = CDataManager::Get_Instance();
+	EQUIP_DATA *pEquipData = pDataManager->Get_pEquipData();
+	if(pEquipData->bUseVisionInspect) m_ledBarVision.Set_On(TRUE);
+	else m_ledBarVision.Set_On(FALSE);
 
  /*
 	//NG barcode reading..
@@ -1520,15 +1531,23 @@ void CWorkDlg::OnBnClickedChkAllPassFunction()
 
 			
 			CLogFile *pLogFile = CLogFile::Get_Instance();
-			sLog.Format("[Work Mode] All Pass push....  LotID[%s] CM[%d] m_bUseContinueLot[%d]", gData.sLotID, gData.nCMJobCount, gData.bUseAllPass);
+			sLog.Format("[Work Mode] All Pass push....  LotID[%s] CM[%d] bUseAllPass[%d]", gData.sLotID, gData.nCMJobCount, gData.bUseAllPass);
 			pLogFile->Save_HandlerLog(sLog);	
 		}
 	}
 	else if(!m_chkAllPass.GetCheck())
 	{
 		gData.bUseAllPass = FALSE;
+
+		CIniFileCS INI(gsCurrentDir + "\\System\\EquipData.ini");
+		if (!INI.Check_File()) { AfxMessageBox("EquipData.ini File Not Found!!!"); return; }
+
+		INI.Set_Bool("OPTION", "VISION_INSPECT", TRUE);
+		pDataManager->Read_EquipData();
+		
+
 		CLogFile *pLogFile = CLogFile::Get_Instance();
-		sLog.Format("[Work Mode] ContinueLot push....  LotID[%s] CM[%d] m_bUseContinueLot[%d]", gData.sLotID, gData.nCMJobCount, gData.bUseAllPass);
+		sLog.Format("[Work Mode] All Pass push....  LotID[%s] CM[%d] bUseAllPass[%d]", gData.sLotID, gData.nCMJobCount, gData.bUseAllPass);
 		pLogFile->Save_HandlerLog(sLog);	
 	}
 
