@@ -159,6 +159,7 @@
     <ClInclude Include="DataSocket.h" />
     <ClInclude Include="ErrorDlg.h" />
     <ClInclude Include="ExtBarcode_Honeywell.h" />
+    <ClInclude Include="FloatingMsgBoxDlg.h" />
     <ClInclude Include="InitialDlg.h" />
     <ClInclude Include="Inspector.h" />
     <ClInclude Include="KeyPadDlg.h" />
@@ -219,6 +220,7 @@
     <ClCompile Include="DataSocket.cpp" />
     <ClCompile Include="ErrorDlg.cpp" />
     <ClCompile Include="ExtBarcode_Honeywell.cpp" />
+    <ClCompile Include="FloatingMsgBoxDlg.cpp" />
     <ClCompile Include="InitialDlg.cpp" />
     <ClCompile Include="Inspector.cpp" />
     <ClCompile Include="KeyPadDlg.cpp" />

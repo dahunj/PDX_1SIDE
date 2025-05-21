@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include "FloatingMsgBoxDlg.h"
+
 #define UM_UPDATE_MODEL			WM_USER+1
 #define UM_UPDATE_RFID			WM_USER+2
 #define	UM_UPDATE_JOB_LIST		WM_USER+3
@@ -125,6 +127,8 @@ protected:
 	static DWORD CALLBACK StreamInCallback(DWORD dwCookie, LPBYTE pbBuff, LONG cb, LONG *pcb);
 
 public:
+	CFloatingMsgBoxDlg * m_pFloatingMsgBoxDlg;
+
 	BOOL m_bAutoRunning;
 
 	void Set_AutoRun(BOOL bAutoRun);

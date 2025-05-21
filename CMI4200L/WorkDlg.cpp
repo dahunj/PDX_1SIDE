@@ -259,12 +259,22 @@ BOOL CWorkDlg::OnInitDialog()
 	m_ledPicker[3][5].ShowWindow(FALSE);
 
 #endif
+
+	m_pFloatingMsgBoxDlg = new CFloatingMsgBoxDlg(this);
+	m_pFloatingMsgBoxDlg->Create(IDD_MSG_FLOATING_DLG, this);
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
 }
 
 void CWorkDlg::OnDestroy()
 {
+	m_pFloatingMsgBoxDlg->DestroyWindow();
+
+	if (m_pFloatingMsgBoxDlg) delete m_pFloatingMsgBoxDlg;
+
+	m_pFloatingMsgBoxDlg = NULL;
+
 	CDialogEx::OnDestroy();
 }
 
@@ -1013,8 +1023,13 @@ void CWorkDlg::Display_Status()
 
 	CDataManager *pDataManager = CDataManager::Get_Instance();
 	EQUIP_DATA *pEquipData = pDataManager->Get_pEquipData();
+	
 	if(pEquipData->bUseVisionInspect) m_ledBarVision.Set_On(TRUE);
 	else m_ledBarVision.Set_On(FALSE);
+
+	if(pEquipData->bUseVisionInspect) m_pFloatingMsgBoxDlg->ShowWindow(SW_HIDE);
+	else m_pFloatingMsgBoxDlg->ShowWindow(SW_SHOW);
+
 
  /*
 	//NG barcode reading..
@@ -1114,6 +1129,10 @@ void CWorkDlg::Display_Status()
 	}
 
 	if (m_nDisCnt==0 || m_rdoWorkStart.GetCheck()) Display_Tray();
+
+
+	
+
 }
 
 void CWorkDlg::Display_LotInfo()
