@@ -306,6 +306,9 @@ typedef struct {
 	long	lStartTime;
 	long	lEndTime;
 	long	lProcTime;
+
+	double  dMotionChkPos;
+	double  dMotionPos[46];
 } GLOVAL_ALARMDATA;
 extern  GLOVAL_ALARMDATA	gAlm;
 

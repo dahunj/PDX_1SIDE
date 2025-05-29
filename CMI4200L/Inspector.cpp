@@ -427,7 +427,7 @@ void CInspector::Get_ScanRequest(int nInspector, CString sDir, CString sSpeed, C
 
 	if (dThickZ >= 0.0 && dThickZ < 9.0) {
 		CWorkDlg *pWorkDlg = CWorkDlg::Get_Instance();
-		CManualDlg *pManualDlg = CManualDlg::Get_Instance();
+		
 		
 		if (pWorkDlg->IsWindowVisible()) {									// AutoRun
 			CSequenceMain *pSequenceMain = CSequenceMain::Get_Instance();
@@ -436,7 +436,7 @@ void CInspector::Get_ScanRequest(int nInspector, CString sDir, CString sSpeed, C
 //			if (nMoldCase == 110 && dStartX > 0.0) pSequenceMain->Set_MoldScan(nDir, dSpeed, dThickZ, dStartX);
 //			else nNG = 1;
 
-		} else if (pManualDlg->m_pManualUnloadDlg->IsWindowVisible()) {	// Manual
+		} else if (g_dlgManual.m_pManualUnloadDlg->IsWindowVisible()) {	// Manual
 
 			//int n3dCase = pManualDlg->m_pManualInspectorDlg->Get_3dRunCase();
 			//if (n3dCase == 0 && dStartX >= 0.0) 
@@ -707,7 +707,6 @@ void CInspector::Get_AMoveRequest(int nInspector, CString sX, CString sY, CStrin
 
 	CCommon *pCommon = CCommon::Get_Instance();
 	CWorkDlg *pWorkDlg = CWorkDlg::Get_Instance();
-	CManualDlg *pManualDlg = CManualDlg::Get_Instance();
 	
 	if (sGbn!="I" && sGbn!="B") {
 		Set_AMoveReply(nInspector, nCanMove, sGbn);
@@ -784,7 +783,7 @@ void CInspector::Get_RMoveRequest(int nInspector, CString sX, CString sY, CStrin
 	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
 	CCommon *pCommon = CCommon::Get_Instance();
 	CWorkDlg *pWorkDlg = CWorkDlg::Get_Instance();
-	CManualDlg *pManualDlg = CManualDlg::Get_Instance();
+	
 	
 	if (sGbn!="I" && sGbn!="B") {
 		Set_RMoveReply(nInspector, nCanMove, sGbn);
@@ -803,7 +802,7 @@ void CInspector::Get_RMoveRequest(int nInspector, CString sX, CString sY, CStrin
 			//if (dZ != 0.0) pAJinAXL->Move_Relative(AX_SCAN_Z, dZ);
 //		}
 
-	} else if (pManualDlg->m_pManualUnloadDlg->IsWindowVisible()) {	// Manual
+	} else if (g_dlgManual.m_pManualUnloadDlg->IsWindowVisible()) {	// Manual
 
 			//if (pAJinAXL->Is_Home(AX_SCAN_X) && pAJinAXL->Is_Home(AX_SCAN_Y) && pAJinAXL->Is_Home(AX_SCAN_Z)) {
 			//	int nMoldCase = pManualDlg->m_pManualInspectorDlg->Get_MoldRunCase();
@@ -1172,20 +1171,7 @@ void CInspector::Get_CalRequest(int nInspector, CString sDir, CString sSpeed, CS
 	double dSpeed = atof(sSpeed);
 	double dStartX = atof(sStartX);
 
-	CManualDlg *pManualDlg = CManualDlg::Get_Instance();
-
-//	if (pManualDlg->m_pManualInspectorDlg->IsWindowVisible()) {	// Manual
-////		if (nInspector == INSPECTOR_MOLD) {
-////			int nMoldCase = pManualDlg->m_pManualInspectorDlg->Get_MoldRunCase();
-////			if (nMoldCase == 0) pManualDlg->m_pManualInspectorDlg->Set_MoldScan(nDir, dSpeed, 0.0, 0.0, SCAN_CALIBRATE);	
-////		} else if (nInspector == INSPECTOR_PCB) {
-////			int nPcbCase = pManualDlg->m_pManualInspectorDlg->Get_PcbRunCase();
-////			if (nPcbCase == 0) pManualDlg->m_pManualInspectorDlg->Set_PcbScan(nDir, dSpeed, 0.0, SCAN_CALIBRATE);
-////		} else if (nInspector == INSPECTOR_3D) {
-//			int n3dCase = pManualDlg->m_pManualInspectorDlg->Get_3dRunCase();
-//			if (n3dCase == 0) pManualDlg->m_pManualInspectorDlg->Set_3dScan(nDir, dSpeed, 0.0, dStartX, SCAN_CALIBRATE);
-////		}
-//	}
+	
 	Set_CalReply(nInspector);
 }
 

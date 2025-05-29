@@ -68,6 +68,8 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 private:
+	LONGLONG	m_nFreq;		// Frequence
+
 	DWORD	m_dwLoopInitMainStart,		m_dwLoopInitMainDelay;
 	DWORD	m_dwLoopInitLoadS1Start,	m_dwLoopInitLoadS1Delay;
 	DWORD	m_dwLoopInitLoad2Start,		m_dwLoopInitLoad2Delay;
@@ -114,6 +116,11 @@ public:
 
 	void DoEvents(int nSleep = 0);
 	void Delay_Time(DWORD msec);
+
+
+	void uSleep(int msec);
+	void Save_MotionPos();
+	int	 Check_MotionPos();
 
 	void Set_LoopTime(int nRun, DWORD msec);
 	BOOL Over_LoopTime(int nRun);

@@ -169,6 +169,7 @@
     <ClInclude Include="Manual_InspectorDlg.h" />
     <ClInclude Include="Manual_LoadingDlg.h" />
     <ClInclude Include="Manual_LoadPickerDlg.h" />
+    <ClInclude Include="Manual_RepeatRunDlg.h" />
     <ClInclude Include="Manual_Unload_PickerDlg.h" />
     <ClInclude Include="Manual_Good_Ng_PickerDlg.h" />
     <ClInclude Include="Manual_UnloadingDlg.h" />
@@ -229,6 +230,7 @@
     <ClCompile Include="Manual_InspectorDlg.cpp" />
     <ClCompile Include="Manual_LoadingDlg.cpp" />
     <ClCompile Include="Manual_LoadPickerDlg.cpp" />
+    <ClCompile Include="Manual_RepeatRunDlg.cpp" />
     <ClCompile Include="Manual_Unload_PickerDlg.cpp" />
     <ClCompile Include="Manual_Good_Ng_PickerDlg.cpp" />
     <ClCompile Include="Manual_UnloadingDlg.cpp" />

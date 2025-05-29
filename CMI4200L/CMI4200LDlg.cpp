@@ -90,7 +90,9 @@ BOOL CCMI4200LDlg::OnInitDialog()
 
 	m_pInitialDlg = CInitialDlg::Get_Instance(this);
 	m_pWorkDlg = CWorkDlg::Get_Instance(this);
-	m_pManualDlg = CManualDlg::Get_Instance(this);
+	
+	g_dlgManual.Create(CManualDlg::IDD, this);
+
 	m_pSetupDlg = CSetupDlg::Get_Instance(this);
 	m_pMonitorDlg = CMonitorDlg::Get_Instance(this);
 	g_dlgPause.Create(CPauseDlg::IDD, this);
@@ -180,8 +182,10 @@ void CCMI4200LDlg::OnDestroy()
 
 	m_pErrorDlg->Delete_Instance();
 	m_pMonitorDlg->Delete_Instance();
+	g_dlgManual.DestroyWindow();
+
 	m_pSetupDlg->Delete_Instance();
-	m_pManualDlg->Delete_Instance();
+	
 	m_pWorkDlg->Delete_Instance();
 	m_pInitialDlg->Delete_Instance();
 	g_dlgPause.DestroyWindow();
@@ -489,7 +493,7 @@ void CCMI4200LDlg::Hide_ModeWindows()
 
 	if (m_nCurrMode == MODE_INITIAL) m_pInitialDlg->ShowWindow(SW_HIDE);
 	if (m_nCurrMode == MODE_WORK) m_pWorkDlg->ShowWindow(SW_HIDE);
-	if (m_nCurrMode == MODE_MANUAL) m_pManualDlg->ShowWindow(SW_HIDE);
+	if (m_nCurrMode == MODE_MANUAL) g_dlgManual.ShowWindow(SW_HIDE);
 	if (m_nCurrMode == MODE_SETUP) m_pSetupDlg->ShowWindow(SW_HIDE);
 	if (m_nCurrMode == MODE_PROHIBIT) g_dlgPause.ShowWindow(SW_HIDE);
 
@@ -588,7 +592,7 @@ void CCMI4200LDlg::Set_CurrentMode(int nMode)
 		m_pLogFile->Save_HandlerLog("[Main Dialog] Work Mode start");
 
 	} else if (m_nCurrMode == MODE_MANUAL) {
-		m_pManualDlg->ShowWindow(SW_SHOW);
+		g_dlgManual.ShowWindow(SW_SHOW);
 		m_stcMainLabel.SetWindowText("Auto Vision Inspection - Manual Mode");
 		m_rdoMainManual.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
 		if (!m_rdoMainManual.GetCheck()) m_rdoMainManual.SetCheck(TRUE);

@@ -58,6 +58,12 @@ CCommon::CCommon()
 	m_bInsideLamp = FALSE;
 
 	m_pFtp = NULL;
+
+	gAlm.dMotionChkPos = 0.1;
+
+	LARGE_INTEGER freq;
+	QueryPerformanceFrequency(&freq);
+	m_nFreq = freq.QuadPart;
 }
 
 CCommon::~CCommon()
@@ -90,6 +96,76 @@ void CCommon::Delay_Time(DWORD msec)
 		dwTerm = (timeE - timeS);
 	} while (dwTerm < msec);
 }
+
+void CCommon::uSleep(int msec)
+{
+	LARGE_INTEGER tStart, tNow;
+	LONGLONG lTerm = 0;
+	QueryPerformanceCounter(&tStart);
+
+	while (TRUE) {
+		QueryPerformanceCounter(&tNow);
+		lTerm = (tNow.QuadPart - tStart.QuadPart) * 1000 / m_nFreq;
+		if (lTerm > msec) break;
+		DoEvents();
+	}
+}
+
+
+
+void CCommon::Save_MotionPos()
+{
+	int nCount = 0;
+
+	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
+
+	for(int i=0; i<AXIS_COUNT; i++) {
+		if(pAJinAXL->Is_Done(i)) { gAlm.dMotionPos[i] = pAJinAXL->Get_pStatus(i)->dPos; }
+		else						{ gAlm.dMotionPos[i] = -100.0; nCount++; }
+	}
+	if (nCount == 0) return;
+
+	uSleep(1000);
+	nCount = 0;
+	for(int i=0; i<AXIS_COUNT; i++) {
+		if (gAlm.dMotionPos[i] < -10.0) {
+			if(pAJinAXL->Is_Done(i)) gAlm.dMotionPos[i] = pAJinAXL->Get_pStatus(i)->dPos;
+			else nCount++;
+		}
+	}
+	if (nCount == 0) return;
+
+	uSleep(3000);
+	for(int i=0; i<AXIS_COUNT; i++) {
+		if (gAlm.dMotionPos[i] < -10.0) {
+			if(pAJinAXL->Is_Done(i)) gAlm.dMotionPos[i] = pAJinAXL->Get_pStatus(i)->dPos;
+		}
+	}
+}
+
+
+
+int CCommon::Check_MotionPos()
+{
+	int		nMotionNo = 99;
+	double	dCurrentPos, dCheckPos;
+	double	dRange = gAlm.dMotionChkPos;
+	if (dRange < 0.05) return nMotionNo;
+
+	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
+
+	for(int i=0; i<AXIS_COUNT; i++) 
+	{		
+		if (gAlm.dMotionPos[i] < -10.0) continue;
+		if (!pAJinAXL->Is_Done(i)) continue;
+
+		dCheckPos   = gAlm.dMotionPos[i];
+		dCurrentPos = pAJinAXL->Get_pStatus(i)->dPos;
+		if (fabs(dCurrentPos - dCheckPos) > dRange) return i;
+	}
+	return nMotionNo;
+}
+
 
 void CCommon::Set_LoopTime(int nRun, DWORD msec)
 {

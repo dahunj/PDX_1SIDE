@@ -10,27 +10,10 @@
 
 // CManualDlg ´ëÈ­ »óÀÚÀÔ´Ï´Ù.
 
+CManualDlg g_dlgManual;
+
 IMPLEMENT_DYNAMIC(CManualDlg, CDialogEx)
 
-CManualDlg *CManualDlg::m_pInstance = NULL;
-
-CManualDlg *CManualDlg::Get_Instance(CWnd *pParent)
-{
-	if (!m_pInstance) {
-		m_pInstance = new CManualDlg(pParent);
-		if (!m_pInstance->m_hWnd) {
-			m_pInstance->Create(IDD_MANUAL_DLG, pParent);
-		}
-	}
-	return m_pInstance;
-}
-
-void CManualDlg::Delete_Instance()
-{
-	if (m_pInstance->m_hWnd) m_pInstance->DestroyWindow();
-	if (m_pInstance) delete m_pInstance;
-	m_pInstance = NULL;
-}
 
 CManualDlg::CManualDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CManualDlg::IDD, pParent)
@@ -50,6 +33,7 @@ void CManualDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_RDO_MANUAL_GRIPPER, m_rdoManualGripper);
 	DDX_Control(pDX, IDC_RDO_MANUAL_PICKER, m_rdoManualPicker);
 	DDX_Control(pDX, IDC_RDO_MANUAL_INSPECTOR, m_rdoManualInspector);
+	DDX_Control(pDX, IDC_RDO_MANUAL_REPEAT, m_rdoManualRepeatRun);
 	DDX_Control(pDX, IDC_RDO_MANUAL_DOOR_LOCK, m_rdoManualDoorLock);
 	DDX_Control(pDX, IDC_RDO_MANUAL_DOOR_UNLOCK, m_rdoManualDoorUnlock);
 
@@ -71,6 +55,7 @@ BEGIN_MESSAGE_MAP(CManualDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_RDO_MANUAL_DOOR_UNLOCK, &CManualDlg::OnBnClickedRdoManualDoorUnlock)
 		
 	ON_BN_CLICKED(IDC_RDO_MANUAL_ELEVATOR2, &CManualDlg::OnBnClickedRdoManualElevator2)
+	ON_BN_CLICKED(IDC_RDO_MANUAL_REPEAT, &CManualDlg::OnBnClickedRdoManualRepeat)
 END_MESSAGE_MAP()
 
 // CManualDlg ¸Þ½ÃÁö Ã³¸®±âÀÔ´Ï´Ù.
@@ -104,6 +89,9 @@ BOOL CManualDlg::OnInitDialog()
 	m_pManualLoadingDlg = new CManual_LoadingDlg(this);
 	m_pManualLoadingDlg->Create(IDD_MANUAL_LOADING_DLG, this);
 
+	m_pManualRepeatRunDlg = new CManual_RepeatRunDlg(this);
+	m_pManualRepeatRunDlg->Create(IDD_MANUAL_REPEAT_RUN_DLG, this);
+
 	// Inspector Dlg Visible
 	m_rdoManualInspector.SetCheck(TRUE);
 	m_rdoManualInspector.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
@@ -124,22 +112,22 @@ void CManualDlg::OnDestroy()
 	m_pManualLoadingDlg->DestroyWindow();
 	m_pManualLoadPickerDlg->DestroyWindow();
 	m_pManualPicker3Dlg->DestroyWindow();
+	m_pManualRepeatRunDlg->DestroyWindow();
 
 	if (m_pManualUnloadDlg) delete m_pManualUnloadDlg;
 	if (m_pManualPickerDlg) delete m_pManualPickerDlg;
 	if (m_pManualInspectorDlg) delete m_pManualInspectorDlg;
-	
 	if (m_pManualLoadPickerDlg) delete m_pManualLoadPickerDlg;
 	if (m_pManualPicker3Dlg) delete m_pManualPicker3Dlg;
-
+	if (m_pManualRepeatRunDlg) delete m_pManualRepeatRunDlg;
 
 	m_pManualUnloadDlg = NULL;
 	m_pManualPickerDlg = NULL;
-	m_pManualInspectorDlg = NULL;
-	
+	m_pManualInspectorDlg = NULL;	
 	m_pManualLoadPickerDlg = NULL;
 	m_pManualPicker3Dlg = NULL;	
 	m_pManualLoadingDlg = NULL;
+	m_pManualRepeatRunDlg = NULL;
 }
 
 BOOL CManualDlg::PreTranslateMessage(MSG* pMsg) 
@@ -163,6 +151,7 @@ void CManualDlg::OnShowWindow(BOOL bShow, UINT nStatus)
 		if (m_rdoManualGripper.GetCheck()) m_pManualInspectorDlg->ShowWindow(SW_SHOW);
 		if (m_rdoManualPicker.GetCheck()) m_pManualPickerDlg->ShowWindow(SW_SHOW);
 		if (m_rdoManualInspector.GetCheck()) m_pManualUnloadDlg->ShowWindow(SW_SHOW);
+		if (m_rdoManualRepeatRun.GetCheck()) m_pManualRepeatRunDlg->ShowWindow(SW_SHOW);
 		
 
 //		m_rdoManualDoorLock.SetCheck(TRUE);
@@ -184,9 +173,9 @@ void CManualDlg::OnShowWindow(BOOL bShow, UINT nStatus)
 		if (m_rdoManualElevator.GetCheck()) m_pManualLoadPickerDlg->ShowWindow(SW_HIDE);
 		if (m_rdoManualElevator2.GetCheck()) m_pManualPicker3Dlg->ShowWindow(SW_HIDE);
 		if (m_rdoManualGripper.GetCheck()) m_pManualInspectorDlg->ShowWindow(SW_HIDE);
-
 		if (m_rdoManualPicker.GetCheck()) m_pManualPickerDlg->ShowWindow(SW_HIDE);
 		if (m_rdoManualInspector.GetCheck()) m_pManualUnloadDlg->ShowWindow(SW_HIDE);
+		if (m_rdoManualRepeatRun.GetCheck()) m_pManualRepeatRunDlg->ShowWindow(SW_HIDE);
 		
 	}
 }
@@ -212,6 +201,9 @@ void CManualDlg::OnTimer(UINT nIDEvent)
 		m_pManualUnloadDlg->Display_Status();
 	} else if (m_pManualLoadingDlg->IsWindowVisible()) {
 		m_pManualLoadingDlg->Display_Status();
+	}
+	else if (m_pManualRepeatRunDlg->IsWindowVisible()) {
+		//m_pManualRepeatRunDlg->Display_Status();
 	}
 
 	SetTimer(0, 100, NULL);
@@ -353,7 +345,8 @@ void CManualDlg::Initial_Controls()
 	m_rdoManualGripper.Init_Ctrl("¹ÙÅÁ", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
 	m_rdoManualPicker.Init_Ctrl("¹ÙÅÁ", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
 	m_rdoManualInspector.Init_Ctrl("¹ÙÅÁ", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
-//	m_rdoManualDoorLock.Init_Ctrl("¹ÙÅÁ", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
+	m_rdoManualRepeatRun.Init_Ctrl("¹ÙÅÁ", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
+	//	m_rdoManualDoorLock.Init_Ctrl("¹ÙÅÁ", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
 //	m_rdoManualDoorUnlock.Init_Ctrl("¹ÙÅÁ", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
 
 	m_rdoManualElevator2.Init_Ctrl("¹ÙÅÁ", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);	
@@ -368,6 +361,7 @@ void CManualDlg::Hide_Windows()
 	m_pManualPicker3Dlg->ShowWindow(SW_HIDE);
 	m_pManualUnloadDlg->ShowWindow(SW_HIDE);	
 	m_pManualLoadingDlg->ShowWindow(SW_HIDE);
+	m_pManualRepeatRunDlg->ShowWindow(SW_HIDE);
 
 	m_rdoManualFlow.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
 	m_rdoManualElevator.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
@@ -375,7 +369,7 @@ void CManualDlg::Hide_Windows()
 	m_rdoManualPicker.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
 	m_rdoManualElevator2.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);	
 	m_rdoManualInspector.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
-
+	m_rdoManualRepeatRun.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
 }
 
 void CManualDlg::MainDoor_Lock()
@@ -397,3 +391,14 @@ void CManualDlg::MainDoor_Unlock()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+
+void CManualDlg::OnBnClickedRdoManualRepeat()
+{
+	if (m_pManualRepeatRunDlg->IsWindowVisible()) return;
+	Hide_Windows();
+	CLogFile *pLogFile = CLogFile::Get_Instance();
+	pLogFile->Save_HandlerLog("[Manual - Repeat Run] Start");
+	m_rdoManualRepeatRun.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
+	m_pManualRepeatRunDlg->ShowWindow(SW_SHOW);
+}

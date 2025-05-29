@@ -250,8 +250,7 @@ void CManual_LoadingDlg::OnBtnShuttleIOClick(UINT nID)
 	CCommon *pCommon = CCommon::Get_Instance();
 	if (!pCommon->Check_MainDoor()) return;
 
-	CManualDlg *pManualDlg = CManualDlg::Get_Instance();
-	pManualDlg->MainDoor_Lock();
+	g_dlgManual.MainDoor_Lock();
 
 	if (nID == IDC_BTN_LD_TRAY_IO_0) {
 		pDY1->oLS_LoadSupport12In = TRUE;
@@ -270,9 +269,8 @@ void CManual_LoadingDlg::OnBtnShuttleIO2Click(UINT nID)
 
 	CCommon *pCommon = CCommon::Get_Instance();
 	if (!pCommon->Check_MainDoor()) return;
-
-	CManualDlg *pManualDlg = CManualDlg::Get_Instance();
-	pManualDlg->MainDoor_Lock();
+		
+	g_dlgManual.MainDoor_Lock();
 
 	if (nID == IDC_BTN_UN_TRAY_IO_0) {
 		pDY1->oLS_UnloadSupport12In = TRUE;
@@ -366,8 +364,7 @@ void CManual_LoadingDlg::OnBtnTR1IOClick(UINT nID)
 	CCommon *pCommon = CCommon::Get_Instance();
 	if (!pCommon->Check_MainDoor()) return;
 
-	CManualDlg *pManualDlg = CManualDlg::Get_Instance();
-	pManualDlg->MainDoor_Lock();
+	g_dlgManual.MainDoor_Lock();
 
 	if (nID == IDC_BTN_TR1_IO_0) {
 //		if (!pCommon->Check_Position(AX_LOAD_TRAY_TR_1_Y, 1)) {
@@ -491,8 +488,7 @@ void CManual_LoadingDlg::OnBtnTR2IOClick(UINT nID)
 	CCommon *pCommon = CCommon::Get_Instance();
 	if (!pCommon->Check_MainDoor()) return;
 
-	CManualDlg *pManualDlg = CManualDlg::Get_Instance();
-	pManualDlg->MainDoor_Lock();
+	g_dlgManual.MainDoor_Lock();
 
 	if (nID == IDC_BTN_TR2_IO_0) {
 //		if (!pCommon->Check_Position(AX_LOAD_TRAY_TR_1_Y, 1)) {

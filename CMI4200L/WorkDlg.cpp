@@ -367,6 +367,7 @@ void CWorkDlg::OnTimer(UINT_PTR nIDEvent)
 	}
 
 	Display_Status();
+	
 
 	if (m_rdoWorkStart.GetCheck()) {
 		if (!gData.bCheckStartComplete) { SetTimer(0, 100, NULL); return; }
@@ -439,7 +440,7 @@ void CWorkDlg::OnTimer(UINT_PTR nIDEvent)
 			pMainDlg->Set_LotErrorLog("STOP", 904, "Stop");
 
 			g_objMES.Set_Status(3);
-
+			pCommon->Save_MotionPos();
 		} else {				// Stop
 			// Auto Start
 			if (!gData.m_bErrorShow) {
