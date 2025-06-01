@@ -141,11 +141,11 @@ void CManual_RepeatRunDlg::OnBnClickedChkRepeatRun()
 	pMainDlg->Enable_ModeButton(!m_chkRepeatRun.GetCheck());
 	pMainDlg->m_btnMainOperator.EnableWindow(!m_chkRepeatRun.GetCheck());
 
-	/*g_dlgManual.m_rdoManualFlow.EnableWindow(!m_chkRepeatRun.GetCheck());
+	g_dlgManual.m_rdoManualFlow.EnableWindow(!m_chkRepeatRun.GetCheck());
 	g_dlgManual.m_rdoManualElevator.EnableWindow(!m_chkRepeatRun.GetCheck());
 	g_dlgManual.m_rdoManualGripper.EnableWindow(!m_chkRepeatRun.GetCheck());
 	g_dlgManual.m_rdoManualPicker.EnableWindow(!m_chkRepeatRun.GetCheck());
-	g_dlgManual.m_rdoManualInspector.EnableWindow(!m_chkRepeatRun.GetCheck());*/
+	g_dlgManual.m_rdoManualInspector.EnableWindow(!m_chkRepeatRun.GetCheck());
 			
 	if (m_chkRepeatRun.GetCheck()) {
 
