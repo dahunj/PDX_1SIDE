@@ -102,3 +102,24 @@ BOOL CCMI4200LApp::InitInstance()
 	// 반환합니다.
 	return FALSE;
 }
+
+
+
+void CCMI4200LApp::DoEvents()
+{
+	MSG msg;
+	if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+}
+
+void CCMI4200LApp::uSleep(int msec)
+{
+	DWORD dwStart = GetTickCount();
+	int dwTerm = 0;
+	do {
+		dwTerm = (int)(GetTickCount() - dwStart);
+		DoEvents();
+	} while (dwTerm < msec);
+}

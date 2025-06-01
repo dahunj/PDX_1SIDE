@@ -642,15 +642,15 @@ void CAJinAXL::Sim_SetOutToIn(int nNo)
 		pDX2->iCMPressUp		= pDY2->oCMPressUp;
 		pDX2->iCMPressDn		= pDY2->oCMPressDn;
 
-		pDX2->iInspCMAlign1In	= pDY2->oInspCMAlign1In;
-		pDX2->iInspCMAlign1Out	= pDY2->oInspCMAlign1Out;
-		pDX2->iInspCMAlign2In	= pDY2->oInspCMAlign2In;
-		pDX2->iInspCMAlign2Out	= pDY2->oInspCMAlign2Out;
-		pDX2->iInspCMAlign3In	= pDY2->oInspCMAlign3In;
+		pDX2->i_IndexAlignLoad_In	= pDY2->oInspCMAlign1In;
+		pDX2->i_IndexAlignLoad_Out	= pDY2->oInspCMAlign1Out;
+		pDX2->i_IndexAlignNG_In	= pDY2->oInspCMAlign2In;
+		pDX2->i_IndexAlignNG_Out	= pDY2->oInspCMAlign2Out;
+		pDX2->i_IndexAlignGood_In	= pDY2->oInspCMAlign3In;
 		 
-		pDX2->iInspCMAlign3Out	= pDY2->oInspCMAlign3Out;
-		pDX2->iInspCMAlign4In	= pDY2->oInspCMAlign4In;
-		pDX2->iInspCMAlign4Out	= pDY2->oInspCMAlign4Out;
+		pDX2->i_IndexAlignGood_Out	= pDY2->oInspCMAlign3Out;
+		pDX2->i_IndexAlignUnload_In	= pDY2->oInspCMAlign4In;
+		pDX2->i_IndexAlignUnload_Out	= pDY2->oInspCMAlign4Out;
 		pDX2->iInspVacuumUp		= pDY2->oInspVacuumUp;
 		pDX2->iInspVacuumDown	= pDY2->oInspVacuumDown;
 	}

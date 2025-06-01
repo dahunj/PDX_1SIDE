@@ -332,21 +332,21 @@ void CManual_InspectorDlg::Display_Status()
 	strPos.Format("%d", gData.nIndexPos);
 	m_stcAxisPos[5].SetWindowText(strPos);
 
-	if (pDX2->iInspCMAlign1In) m_ledTRIO[0].Set_On(TRUE);
+	if (pDX2->i_IndexAlignLoad_In) m_ledTRIO[0].Set_On(TRUE);
 	else m_ledTRIO[0].Set_On(FALSE);
-	if (pDX2->iInspCMAlign1Out) m_ledTRIO[1].Set_On(TRUE);
+	if (pDX2->i_IndexAlignLoad_Out) m_ledTRIO[1].Set_On(TRUE);
 	else m_ledTRIO[1].Set_On(FALSE);
-	if (pDX2->iInspCMAlign2In) m_ledTRIO[2].Set_On(TRUE);
+	if (pDX2->i_IndexAlignNG_In) m_ledTRIO[2].Set_On(TRUE);
 	else m_ledTRIO[2].Set_On(FALSE);
-	if (pDX2->iInspCMAlign2Out) m_ledTRIO[3].Set_On(TRUE);
+	if (pDX2->i_IndexAlignNG_Out) m_ledTRIO[3].Set_On(TRUE);
 	else m_ledTRIO[3].Set_On(FALSE);
-	if (pDX2->iInspCMAlign3In) m_ledTRIO[4].Set_On(TRUE);
+	if (pDX2->i_IndexAlignGood_In) m_ledTRIO[4].Set_On(TRUE);
 	else m_ledTRIO[4].Set_On(FALSE);
-	if (pDX2->iInspCMAlign3Out) m_ledTRIO[5].Set_On(TRUE);
+	if (pDX2->i_IndexAlignGood_Out) m_ledTRIO[5].Set_On(TRUE);
 	else m_ledTRIO[5].Set_On(FALSE);
-	if (pDX2->iInspCMAlign4In) m_ledTRIO[6].Set_On(TRUE);
+	if (pDX2->i_IndexAlignUnload_In) m_ledTRIO[6].Set_On(TRUE);
 	else m_ledTRIO[6].Set_On(FALSE);
-	if (pDX2->iInspCMAlign4Out) m_ledTRIO[7].Set_On(TRUE);
+	if (pDX2->i_IndexAlignUnload_Out) m_ledTRIO[7].Set_On(TRUE);
 	else m_ledTRIO[7].Set_On(FALSE);
 	if (pDX2->iInspVacuumUp) m_ledTRIO[8].Set_On(TRUE);
 	else m_ledTRIO[8].Set_On(FALSE);
@@ -551,8 +551,8 @@ void CManual_InspectorDlg::OnBtnVisionYClick(UINT nID)
 		}
 	}
 
-	if (pDX2->iInspCMAlign1In && !pDX2->iInspCMAlign1Out && pDX2->iInspCMAlign2In && !pDX2->iInspCMAlign2Out && 
-		pDX2->iInspCMAlign3In && !pDX2->iInspCMAlign3Out && pDX2->iInspCMAlign4In && !pDX2->iInspCMAlign4Out ) {
+	if (pDX2->i_IndexAlignLoad_In && !pDX2->i_IndexAlignLoad_Out && pDX2->i_IndexAlignNG_In && !pDX2->i_IndexAlignNG_Out && 
+		pDX2->i_IndexAlignGood_In && !pDX2->i_IndexAlignGood_Out && pDX2->i_IndexAlignUnload_In && !pDX2->i_IndexAlignUnload_Out ) {
 		if (nID == IDC_BTN_VISION_Y_0) {
 			pCommon->Move_Position(AX_INDEX_R, 0);
 		} 

@@ -5,6 +5,7 @@
 #include "AJinAXL.h"
 #include "LogFile.h"
 
+
 // CManual_RepeatRunDlg 대화 상자입니다.
 
 class CManual_RepeatRunDlg : public CDialogEx
@@ -23,6 +24,7 @@ public:
 	CCheckCS	m_chkRepeatRun;
 
 	CEditCS		m_edtMsg;
+	CLabelCS    m_lblCase;
 
 // 대화 상자 데이터입니다.
 	enum { IDD = IDD_MANUAL_REPEAT_RUN_DLG };
@@ -41,6 +43,8 @@ private:
 	CAJinAXL *pAJinAXL;
 
 protected:
+	CString m_strTemp;
+
 	int m_nRepeatCase;
 
 	int m_nPickerSelected;
@@ -63,4 +67,5 @@ public:
 	afx_msg void OnBnClickedChkRepeatRun();
 	afx_msg void OnCbnSelchangeCboPicker();
 	afx_msg void OnCbnSelchangeCboPickNum();
+	afx_msg void OnBnClickedBtnResetcase();
 };

@@ -217,6 +217,7 @@ void CManualDlg::OnBnClickedRdoManualFlow()
 	CLogFile *pLogFile = CLogFile::Get_Instance();
 	pLogFile->Save_HandlerLog("[Manual - Flow] Start");
 	m_rdoManualFlow.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
+	m_rdoManualFlow.SetCheck(TRUE);
 	m_pManualLoadingDlg->ShowWindow(SW_SHOW);
 }
 
@@ -226,16 +227,10 @@ void CManualDlg::OnBnClickedRdoManualElevator()
 	Hide_Windows();
 	CLogFile *pLogFile = CLogFile::Get_Instance();
 	pLogFile->Save_HandlerLog("[Manual - Picker2] Start");
-	m_rdoManualElevator.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
+	m_rdoManualElevator.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT); 
+	m_rdoManualElevator.SetCheck(TRUE);
 	m_pManualLoadPickerDlg->ShowWindow(SW_SHOW);
-/*
-	if (m_pManualElevatorDlg->IsWindowVisible()) return;
-	Hide_Windows();
-	CLogFile *pLogFile = CLogFile::Get_Instance();
-	pLogFile->Save_HandlerLog("[Manual - Elevator] Start");
-	m_rdoManualElevator.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
-	m_pManualElevatorDlg->ShowWindow(SW_SHOW);
-*/
+
 }
 
 void CManualDlg::OnBnClickedRdoManualGripper()
@@ -245,22 +240,9 @@ void CManualDlg::OnBnClickedRdoManualGripper()
 	CLogFile *pLogFile = CLogFile::Get_Instance();
 	pLogFile->Save_HandlerLog("[Manual - Elevator] Start");
 	m_rdoManualGripper.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
+	m_rdoManualGripper.SetCheck(TRUE);
 	m_pManualInspectorDlg->ShowWindow(SW_SHOW);
-/*
-	//if (m_pManualGripperDlg->IsWindowVisible()) return;
-	//Hide_Windows();
-	//CLogFile *pLogFile = CLogFile::Get_Instance();
-	//pLogFile->Save_HandlerLog("[Manual - Gripper] Start");
-	//m_rdoManualGripper.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
-	//m_pManualGripperDlg->ShowWindow(SW_SHOW);
 
-	if (m_pManualPicker2Dlg->IsWindowVisible()) return;
-	Hide_Windows();
-	CLogFile *pLogFile = CLogFile::Get_Instance();
-	pLogFile->Save_HandlerLog("[Manual - Picker2] Start");
-	m_rdoManualPicker2.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
-	m_pManualPicker2Dlg->ShowWindow(SW_SHOW);
-*/
 }
 
 void CManualDlg::OnBnClickedRdoManualPicker()
@@ -270,6 +252,7 @@ void CManualDlg::OnBnClickedRdoManualPicker()
 	CLogFile *pLogFile = CLogFile::Get_Instance();
 	pLogFile->Save_HandlerLog("[Manual - Picker] Start");
 	m_rdoManualPicker.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
+	m_rdoManualPicker.SetCheck(TRUE);
 	m_pManualPickerDlg->ShowWindow(SW_SHOW);
 }
 
@@ -280,6 +263,7 @@ void CManualDlg::OnBnClickedRdoManualInspector()
 	CLogFile *pLogFile = CLogFile::Get_Instance();
 	pLogFile->Save_HandlerLog("[Manual - Inspector] Start");
 	m_rdoManualInspector.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
+	m_rdoManualInspector.SetCheck(TRUE);
 	m_pManualUnloadDlg->ShowWindow(SW_SHOW);
 }
 
@@ -293,17 +277,10 @@ void CManualDlg::OnBnClickedRdoManualElevator2()
 	CLogFile *pLogFile = CLogFile::Get_Instance();
 	pLogFile->Save_HandlerLog("[Manual - Picker3] Start");
 	m_rdoManualElevator2.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
+	m_rdoManualElevator2.SetCheck(TRUE);
 	m_pManualPicker3Dlg->ShowWindow(SW_SHOW);
 
-/*
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	if (m_pManualElevator2Dlg->IsWindowVisible()) return;
-	Hide_Windows();
-	CLogFile *pLogFile = CLogFile::Get_Instance();
-	pLogFile->Save_HandlerLog("[Manual - Elevator2] Start");
-	m_rdoManualElevator2.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
-	m_pManualElevator2Dlg->ShowWindow(SW_SHOW);
-*/
+
 }
 
 void CManualDlg::OnBnClickedRdoManualDoorLock()
@@ -370,6 +347,14 @@ void CManualDlg::Hide_Windows()
 	m_rdoManualElevator2.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);	
 	m_rdoManualInspector.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
 	m_rdoManualRepeatRun.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
+
+	m_rdoManualFlow.SetCheck(FALSE);
+	m_rdoManualElevator.SetCheck(FALSE);
+	m_rdoManualGripper.SetCheck(FALSE);
+	m_rdoManualPicker.SetCheck(FALSE);
+	m_rdoManualElevator2.SetCheck(FALSE);
+	m_rdoManualInspector.SetCheck(FALSE);
+	m_rdoManualRepeatRun.SetCheck(FALSE);
 }
 
 void CManualDlg::MainDoor_Lock()
@@ -400,5 +385,6 @@ void CManualDlg::OnBnClickedRdoManualRepeat()
 	CLogFile *pLogFile = CLogFile::Get_Instance();
 	pLogFile->Save_HandlerLog("[Manual - Repeat Run] Start");
 	m_rdoManualRepeatRun.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
+	m_rdoManualRepeatRun.SetCheck(TRUE);
 	m_pManualRepeatRunDlg->ShowWindow(SW_SHOW);
 }

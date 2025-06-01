@@ -1462,8 +1462,8 @@ BOOL CSequenceInit::Initial_IndexTRun()
 			m_pCommon->Set_LoopTime(INITIAL_INDEXT, 60000);
 		break;
 	case 112:
-		if (m_pDX2->iInspCMAlign1In && !m_pDX2->iInspCMAlign1Out && m_pDX2->iInspCMAlign2In && !m_pDX2->iInspCMAlign2Out && 
-			m_pDX2->iInspCMAlign3In && !m_pDX2->iInspCMAlign3Out && m_pDX2->iInspCMAlign4In && !m_pDX2->iInspCMAlign4Out ) {
+		if (m_pDX2->i_IndexAlignLoad_In && !m_pDX2->i_IndexAlignLoad_Out && m_pDX2->i_IndexAlignNG_In && !m_pDX2->i_IndexAlignNG_Out && 
+			m_pDX2->i_IndexAlignGood_In && !m_pDX2->i_IndexAlignGood_Out && m_pDX2->i_IndexAlignUnload_In && !m_pDX2->i_IndexAlignUnload_Out ) {
 			if (!m_pDX3->iInspVacuumPad1Check && !m_pDX3->iInspVacuumPad2Check && !m_pDX3->iInspVacuumPad3Check && 
 				!m_pDX3->iInspVacuumPad4Check && !m_pDX3->iInspVacuumPad5Check  ) {
 				m_pDY2->oInspVacuumUp = FALSE;
@@ -1565,7 +1565,7 @@ BOOL CSequenceInit::Initial_IndexTRun()
 			m_pCommon->Set_LoopTime(INITIAL_INDEXT, 60000);
 		break;
 	case 141:
-		if (!m_pDX2->iInspCMAlign1In && m_pDX2->iInspCMAlign1Out ) {
+		if (!m_pDX2->i_IndexAlignLoad_In && m_pDX2->i_IndexAlignLoad_Out ) {
 			m_nInitIndexTCase = 200;
 			m_pCommon->Set_LoopTime(INITIAL_INDEXT, 60000);
 		}

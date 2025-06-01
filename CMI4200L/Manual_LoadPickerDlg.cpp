@@ -466,7 +466,7 @@ void CManual_LoadPickerDlg::OnBtnMLNGPickZClick(UINT nID)
 		if (!pAJinAXL->Is_Home(AX_LOAD_PICKER_Z)) return;
 
 #ifdef PICKER_3
-		if (pDX2->iInspCMAlign1In && pCommon->Check_Position(AX_LOAD_PICKER_Y1, 2) &&
+		if (pDX2->i_IndexAlignLoad_In && pCommon->Check_Position(AX_LOAD_PICKER_Y1, 2) &&
 		   (pDX2->iMLPicker1CMCheck || pDX2->iMLPicker2CMCheck || pDX2->iMLPicker3CMCheck)) {
 			AfxMessageBox(_T("Can not move......(Load Picker CM Check And Align 1 In)"));
 			return;
@@ -477,7 +477,7 @@ void CManual_LoadPickerDlg::OnBtnMLNGPickZClick(UINT nID)
 		}
 #endif
 #ifdef PICKER_5
-		if (pDX2->iInspCMAlign1In && pCommon->Check_Position(AX_LOAD_PICKER_Y1, 2) &&
+		if (pDX2->i_IndexAlignLoad_In && pCommon->Check_Position(AX_LOAD_PICKER_Y1, 2) &&
 		   (pDX2->iMLPicker1CMCheck || pDX2->iMLPicker2CMCheck || pDX2->iMLPicker3CMCheck || pDX2->iMLPicker4CMCheck || pDX2->iMLPicker5CMCheck)) {
 			AfxMessageBox(_T("Can not move......(Load Picker CM Check And Align 1 In)"));
 			return;
@@ -489,7 +489,7 @@ void CManual_LoadPickerDlg::OnBtnMLNGPickZClick(UINT nID)
 		}
 #endif
 #ifdef PICKER_6
-		if (pDX2->iInspCMAlign1In && pCommon->Check_Position(AX_LOAD_PICKER_Y1, 2) &&
+		if (pDX2->i_IndexAlignLoad_In && pCommon->Check_Position(AX_LOAD_PICKER_Y1, 2) &&
 			(pDX2->iMLPicker1CMCheck || pDX2->iMLPicker2CMCheck || pDX2->iMLPicker3CMCheck || pDX2->iMLPicker4CMCheck || pDX2->iMLPicker5CMCheck || pDX2->iMLPicker6CMCheck)) {
 				AfxMessageBox(_T("Can not move......(Load Picker CM Check And Align 1 In)"));
 				return;
@@ -506,7 +506,7 @@ void CManual_LoadPickerDlg::OnBtnMLNGPickZClick(UINT nID)
 		if (!pAJinAXL->Is_Home(AX_LOAD_PICKER_Z)) return;
 
 #ifdef PICKER_3
-		if (pDX2->iInspCMAlign1In && pCommon->Check_Position(AX_LOAD_PICKER_Y1, 2) &&
+		if (pDX2->i_IndexAlignLoad_In && pCommon->Check_Position(AX_LOAD_PICKER_Y1, 2) &&
 		   (pDX2->iMLPicker1CMCheck || pDX2->iMLPicker2CMCheck || pDX2->iMLPicker3CMCheck)) {
 			AfxMessageBox(_T("Can not move......(Load Picker CM Check And Align 1 In)"));
 			return;
@@ -517,7 +517,7 @@ void CManual_LoadPickerDlg::OnBtnMLNGPickZClick(UINT nID)
 		}
 #endif
 #ifdef PICKER_5
-		if (pDX2->iInspCMAlign1In && pCommon->Check_Position(AX_LOAD_PICKER_Y1, 2) &&
+		if (pDX2->i_IndexAlignLoad_In && pCommon->Check_Position(AX_LOAD_PICKER_Y1, 2) &&
 		   (pDX2->iMLPicker1CMCheck || pDX2->iMLPicker2CMCheck || pDX2->iMLPicker3CMCheck || pDX2->iMLPicker4CMCheck || pDX2->iMLPicker5CMCheck)) {
 			AfxMessageBox(_T("Can not move......(Load Picker CM Check And Align 1 In)"));
 			return;
@@ -529,7 +529,7 @@ void CManual_LoadPickerDlg::OnBtnMLNGPickZClick(UINT nID)
 		}
 #endif
 #ifdef PICKER_6
-		if (pDX2->iInspCMAlign1In && pCommon->Check_Position(AX_LOAD_PICKER_Y1, 2) &&
+		if (pDX2->i_IndexAlignLoad_In && pCommon->Check_Position(AX_LOAD_PICKER_Y1, 2) &&
 			(pDX2->iMLPicker1CMCheck || pDX2->iMLPicker2CMCheck || pDX2->iMLPicker3CMCheck || pDX2->iMLPicker4CMCheck || pDX2->iMLPicker5CMCheck || pDX2->iMLPicker6CMCheck)) {
 				AfxMessageBox(_T("Can not move......(Load Picker CM Check And Align 1 In)"));
 				return;

@@ -23,6 +23,10 @@ public:
 // 구현입니다.
 
 	DECLARE_MESSAGE_MAP()
+
+public:
+	void DoEvents();
+	void uSleep(int msec);
 };
 
 extern CCMI4200LApp theApp;

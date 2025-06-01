@@ -190,6 +190,20 @@ public:
 	void	PickerUnload_Move(int nType, int nYY, int nTrayNo);	//Unload Picker(2)
 	void	PickerGood_Move(int nType, int nPNo, int nYY);		//Good Picker(3)
 
+
+	BOOL	Get_IndexAlignOut(int nPos); // 1: Load 2: NG 3: GOOD 4:Unload
+	
+	void	Set_LoadPickerOpen(int nNo);
+	BOOL	Get_LoadPickerOpen(int nNo);
+	void	Set_LoadPickerClose(int nNo);
+	BOOL	Get_LoadPickerClose(int nNo);
+
+	void	Set_UnloadPickerOpen(int nNo);
+	BOOL	Get_UnloadPickerOpen(int nNo);
+	void	Set_UnloadPickerClose(int nNo);
+	BOOL	Get_UnloadPickerClose(int nNo);
+	
+
 	void	Set_NGPickerUp(int nNo);
 	void	Set_NGPickerDown(int nNo);
 	BOOL	Get_NGPickerDown(int nNo);

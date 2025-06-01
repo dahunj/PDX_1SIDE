@@ -1408,6 +1408,145 @@ void CCommon::Set_TimeUpdate(CString sTime)	// sTime Format : "2000-01-01 12:30:
 	SetLocalTime(&time);
 }
 
+BOOL CCommon::Get_IndexAlignOut(int nPos)
+{
+	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
+	DX_DATA_2 *pDX2 = pAJinAXL->Get_pDX2();
+
+	if(nPos == 1) if(pDX2->i_IndexAlignLoad_In || !pDX2->i_IndexAlignLoad_Out) return FALSE;
+	
+	return TRUE;
+}
+
+
+void CCommon::Set_LoadPickerOpen(int nNo)
+{
+	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
+	DY_DATA_2 *m_pDY2 = pAJinAXL->Get_pDY2();
+
+	if(nNo == 1)
+	{
+		m_pDY2->oMLPicker1Open = TRUE;
+		m_pDY2->oMLPicker1Close = FALSE;		
+	}
+	if(nNo == 2)
+	{
+		m_pDY2->oMLPicker2Open = TRUE;
+		m_pDY2->oMLPicker2Close = FALSE;		
+	}
+	if(nNo == 3)
+	{
+		m_pDY2->oMLPicker3Open = TRUE;
+		m_pDY2->oMLPicker3Close = FALSE;		
+	}
+	if(nNo == 4)
+	{
+		m_pDY2->oMLPicker4Open = TRUE;
+		m_pDY2->oMLPicker4Close = FALSE;		
+	}
+	if(nNo == 5)
+	{
+		m_pDY2->oMLPicker5Open = TRUE;
+		m_pDY2->oMLPicker5Close = FALSE;		
+	}
+	pAJinAXL->Write_Output(2);
+}
+
+BOOL CCommon::Get_LoadPickerOpen(int nNo)
+{
+	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
+	DX_DATA_2 *pDX2 = pAJinAXL->Get_pDX2();
+	
+	if(nNo == 1)
+	{
+		if(!pDX2->iMLPicker1CMCheck && pDX2->iMLPicker1Open) return TRUE;
+	}
+	if(nNo == 2)
+	{
+		if(!pDX2->iMLPicker2CMCheck && pDX2->iMLPicker2Open) return TRUE;
+	}
+	if(nNo == 3)
+	{
+		if(!pDX2->iMLPicker3CMCheck && pDX2->iMLPicker3Open) return TRUE;
+	}
+	if(nNo == 4)
+	{
+		if(!pDX2->iMLPicker4CMCheck && pDX2->iMLPicker4Open) return TRUE;
+	}
+	if(nNo == 5)
+	{
+		if(!pDX2->iMLPicker5CMCheck && pDX2->iMLPicker5Open) return TRUE;
+	}
+	return FALSE;
+}
+
+
+
+
+void CCommon::Set_LoadPickerClose(int nNo)
+{
+	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
+	DY_DATA_2 *m_pDY2 = pAJinAXL->Get_pDY2();
+
+	if(nNo == 1)
+	{
+		m_pDY2->oMLPicker1Open = FALSE;
+		m_pDY2->oMLPicker1Close = TRUE;		
+	}
+	if(nNo == 2)
+	{
+		m_pDY2->oMLPicker2Open = FALSE;
+		m_pDY2->oMLPicker2Close = TRUE;		
+	}
+	if(nNo == 3)
+	{
+		m_pDY2->oMLPicker3Open = FALSE;
+		m_pDY2->oMLPicker3Close = TRUE;		
+	}
+	if(nNo == 4)
+	{
+		m_pDY2->oMLPicker4Open = FALSE;
+		m_pDY2->oMLPicker4Close = TRUE;		
+	}
+	if(nNo == 5)
+	{
+		m_pDY2->oMLPicker5Open = FALSE;
+		m_pDY2->oMLPicker5Close = TRUE;		
+	}
+	pAJinAXL->Write_Output(2);
+
+}
+
+BOOL CCommon::Get_LoadPickerClose(int nNo)
+{
+	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
+	DX_DATA_2 *pDX2 = pAJinAXL->Get_pDX2();
+	
+	if(nNo == 1)
+	{
+		if(pDX2->iMLPicker1CMCheck && !pDX2->iMLPicker1Open) return TRUE;
+	}
+	if(nNo == 2)
+	{
+		if(pDX2->iMLPicker2CMCheck && !pDX2->iMLPicker2Open) return TRUE;
+	}
+	if(nNo == 3)
+	{
+		if(pDX2->iMLPicker3CMCheck && !pDX2->iMLPicker3Open) return TRUE;
+	}
+	if(nNo == 4)
+	{
+		if(pDX2->iMLPicker4CMCheck && !pDX2->iMLPicker4Open) return TRUE;
+	}
+	if(nNo == 5)
+	{
+		if(pDX2->iMLPicker5CMCheck && !pDX2->iMLPicker5Open) return TRUE;
+	}
+	return FALSE;
+
+}
+
+
 /*
 // 정수 x 의 n번째 비트를, b로 설정하는 함수
 unsigned short setAbit(unsigned short x, int n, int b) { // setbit()
@@ -1431,6 +1570,134 @@ char *ushortToBinary(unsigned short i) {
 }
 */
 
+
+
+void CCommon::Set_UnloadPickerOpen(int nNo)
+{
+	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
+	DY_DATA_5 *m_pDY5 = pAJinAXL->Get_pDY5();
+
+	if(nNo == 1)
+	{
+		m_pDY5->oMUPicker1Open = TRUE;
+		m_pDY5->oMUPicker1Close = FALSE;		
+	}
+	if(nNo == 2)
+	{
+		m_pDY5->oMUPicker2Open = TRUE;
+		m_pDY5->oMUPicker2Close = FALSE;		
+	}
+	if(nNo == 3)
+	{
+		m_pDY5->oMUPicker3Open = TRUE;
+		m_pDY5->oMUPicker3Close = FALSE;		
+	}
+	if(nNo == 4)
+	{
+		m_pDY5->oMUPicker4Open = TRUE;
+		m_pDY5->oMUPicker4Close = FALSE;		
+	}
+	if(nNo == 5)
+	{
+		m_pDY5->oMUPicker5Open = TRUE;
+		m_pDY5->oMUPicker5Close = FALSE;		
+	}
+	pAJinAXL->Write_Output(5);
+}
+
+BOOL CCommon::Get_UnloadPickerOpen(int nNo)
+{
+	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
+	DX_DATA_5 *pDX5 = pAJinAXL->Get_pDX5();
+
+	if(nNo == 1)
+	{
+		if(!pDX5->iMUPicker1CMCheck && pDX5->iMUPicker1Open) return TRUE;
+	}
+	if(nNo == 2)
+	{
+		if(!pDX5->iMUPicker2CMCheck && pDX5->iMUPicker2Open) return TRUE;
+	}
+	if(nNo == 3)
+	{
+		if(!pDX5->iMUPicker3CMCheck && pDX5->iMUPicker3Open) return TRUE;
+	}
+	if(nNo == 4)
+	{
+		if(!pDX5->iMUPicker4CMCheck && pDX5->iMUPicker4Open) return TRUE;
+	}
+	if(nNo == 5)
+	{
+		if(!pDX5->iMUPicker5CMCheck && pDX5->iMUPicker5Open) return TRUE;
+	}
+	return FALSE;
+}
+
+
+
+
+void CCommon::Set_UnloadPickerClose(int nNo)
+{
+	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
+	DY_DATA_5 *m_pDY5 = pAJinAXL->Get_pDY5();
+
+	if(nNo == 1)
+	{
+		m_pDY5->oMUPicker1Open = FALSE;
+		m_pDY5->oMUPicker1Close = TRUE;		
+	}
+	if(nNo == 2)
+	{
+		m_pDY5->oMUPicker2Open = FALSE;
+		m_pDY5->oMUPicker2Close = TRUE;		
+	}
+	if(nNo == 3)
+	{
+		m_pDY5->oMUPicker3Open = FALSE;
+		m_pDY5->oMUPicker3Close = TRUE;		
+	}
+	if(nNo == 4)
+	{
+		m_pDY5->oMUPicker4Open = FALSE;
+		m_pDY5->oMUPicker4Close = TRUE;		
+	}
+	if(nNo == 5)
+	{
+		m_pDY5->oMUPicker5Open = FALSE;
+		m_pDY5->oMUPicker5Close = TRUE;		
+	}
+	pAJinAXL->Write_Output(5);
+
+}
+
+BOOL CCommon::Get_UnloadPickerClose(int nNo)
+{
+	CAJinAXL *pAJinAXL = CAJinAXL::Get_Instance();
+	DX_DATA_5 *pDX5 = pAJinAXL->Get_pDX5();
+
+	if(nNo == 1)
+	{
+		if(pDX5->iMUPicker1CMCheck && !pDX5->iMUPicker1Open) return TRUE;
+	}
+	if(nNo == 2)
+	{
+		if(pDX5->iMUPicker2CMCheck && !pDX5->iMUPicker2Open) return TRUE;
+	}
+	if(nNo == 3)
+	{
+		if(pDX5->iMUPicker3CMCheck && !pDX5->iMUPicker3Open) return TRUE;
+	}
+	if(nNo == 4)
+	{
+		if(pDX5->iMUPicker4CMCheck && !pDX5->iMUPicker4Open) return TRUE;
+	}
+	if(nNo == 5)
+	{
+		if(pDX5->iMUPicker5CMCheck && !pDX5->iMUPicker5Open) return TRUE;
+	}
+	return FALSE;
+
+}
 
 
 

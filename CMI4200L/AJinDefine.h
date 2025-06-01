@@ -185,15 +185,15 @@ typedef union tag_DX_DATA_2 {
 		DWORD iCMPressUp: 1;				// X216
 		DWORD iCMPressDn: 1;				// X217
 		DWORD i218: 1;						// X218
-		DWORD iInspCMAlign1In: 1;			// X219
-		DWORD iInspCMAlign1Out: 1;			// X220
-		DWORD iInspCMAlign2In: 1;			// X221
-		DWORD iInspCMAlign2Out: 1;			// X222
-		DWORD iInspCMAlign3In: 1;			// X223
+		DWORD i_IndexAlignLoad_In: 1;			// X219
+		DWORD i_IndexAlignLoad_Out: 1;			// X220
+		DWORD i_IndexAlignNG_In: 1;			// X221
+		DWORD i_IndexAlignNG_Out: 1;			// X222
+		DWORD i_IndexAlignGood_In: 1;			// X223
 		       
-		DWORD iInspCMAlign3Out: 1;			// X224
-		DWORD iInspCMAlign4In: 1;			// X225
-		DWORD iInspCMAlign4Out: 1;			// X226
+		DWORD i_IndexAlignGood_Out: 1;			// X224
+		DWORD i_IndexAlignUnload_In: 1;			// X225
+		DWORD i_IndexAlignUnload_Out: 1;			// X226
 		DWORD iInspVacuumUp: 1;				// X227
 		DWORD iInspVacuumDown: 1;			// X228
 		DWORD iIndexPosPin1: 1;		// X229

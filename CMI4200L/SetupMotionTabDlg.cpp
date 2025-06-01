@@ -649,8 +649,8 @@ BOOL CSetupMotionTabDlg::Check_Interlock(int nAxis)
 			AfxMessageBox(_T("Unload Picker Z Ready Position 위치후에 진행하세요....."));
 			return FALSE;
 		}
-		if (!pDX2->iInspCMAlign1In || pDX2->iInspCMAlign1Out || !pDX2->iInspCMAlign2In || pDX2->iInspCMAlign2Out || 
-			!pDX2->iInspCMAlign3In || pDX2->iInspCMAlign3Out || !pDX2->iInspCMAlign4In || pDX2->iInspCMAlign4Out ) {
+		if (!pDX2->i_IndexAlignLoad_In || pDX2->i_IndexAlignLoad_Out || !pDX2->i_IndexAlignNG_In || pDX2->i_IndexAlignNG_Out || 
+			!pDX2->i_IndexAlignGood_In || pDX2->i_IndexAlignGood_Out || !pDX2->i_IndexAlignUnload_In || pDX2->i_IndexAlignUnload_Out ) {
 			AfxMessageBox(_T("Index Align 1~4 In후 진행하세요............."));
 			return FALSE;
 		}

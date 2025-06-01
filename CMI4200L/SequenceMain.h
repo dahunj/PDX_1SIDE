@@ -103,7 +103,7 @@ public:
 	void Set_RunCase(int nCase1, int nCase2, int nCase3, int nCase4, int nCase5, int nCase6, int nCase7, int nCase8, int nCase9, int nCase10, int nCase11, int nCase12);
 	int  Get_IsAutoRun(int nType=0);	//1: APD »Æ¿Œ
 	void Set_ClearRunData(int nType);
-
+	
 	BOOL Check_NGPickerAllUp();
 	BOOL Check_GdPickerAllUp();
 	BOOL Check_NGTrayEmpty(int nNo);
