@@ -1,4 +1,4 @@
-// Manual_RepeatRunDlg.cpp : ±¸Çö ÆÄÀÏÀÔ´Ï´Ù.
+// Manual_RepeatRunDlg.cpp : êµ¬í˜„ íŒŒì¼ì…ë‹ˆë‹¤.
 //
 
 #include "stdafx.h"
@@ -9,7 +9,7 @@
 #include "ManualDlg.h"
 #include "CMI4200LDlg.h"
 
-// CManual_RepeatRunDlg ´ëÈ­ »óÀÚÀÔ´Ï´Ù.
+// CManual_RepeatRunDlg ëŒ€í™” ìƒìì…ë‹ˆë‹¤.
 
 IMPLEMENT_DYNAMIC(CManual_RepeatRunDlg, CDialogEx)
 
@@ -48,7 +48,7 @@ BEGIN_MESSAGE_MAP(CManual_RepeatRunDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// CManual_RepeatRunDlg ¸Ş½ÃÁö Ã³¸®±âÀÔ´Ï´Ù.
+// CManual_RepeatRunDlg ë©”ì‹œì§€ ì²˜ë¦¬ê¸°ì…ë‹ˆë‹¤.
 
 
 BOOL CManual_RepeatRunDlg::OnInitDialog()
@@ -90,8 +90,8 @@ void CManual_RepeatRunDlg::OnShowWindow(BOOL bShow, UINT nStatus)
 	if (!bShow) return;
 
 	CString strMsg;
-	strMsg = "1. °¢ Picker Z Ready Up ½ÃÀÛÇÒ°Í (¾Æ´Ò½Ã Á¤Áö)\r\n";
-	strMsg += "2. Á¤Áö½Ã (Repeat Stop) ÈÄ ÇØ´ç ºÎºĞ ¼¾¼­ Á¡°ËÇÊ¿ä \r\n";
+	strMsg = "1. ê° Picker Z Ready Up ì‹œì‘í• ê²ƒ (ì•„ë‹ì‹œ ì •ì§€)\r\n";
+	strMsg += "2. ì •ì§€ì‹œ (Repeat Stop) í›„ í•´ë‹¹ ë¶€ë¶„ ì„¼ì„œ ì ê²€í•„ìš” \r\n";
 	m_edtMsg.SetWindowText(strMsg);
 
 	//Display_Status();
@@ -105,7 +105,7 @@ void CManual_RepeatRunDlg::OnDestroy()
 {
 	CDialogEx::OnDestroy();
 
-	// TODO: ¿©±â¿¡ ¸Ş½ÃÁö Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ì—¬ê¸°ì— ë©”ì‹œì§€ ì²˜ë¦¬ê¸° ì½”ë“œë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
 }
 
 
@@ -147,7 +147,7 @@ void CManual_RepeatRunDlg::OnBnClickedChkRepeatRun()
 		//if (nMotionNo < 99) 
 		//{
 		//	double dCurrentPos = pAJinAXL->Get_pStatus(nMotionNo)->dPos;		
-		//	strTemp.Format("Motion(%d Axis) À§Ä¡¸¦ Check ÇÏ¼¼¿ä.\nÀÌÀüÀ§Ä¡(%0.3lf) != ÇöÀçÀ§Ä¡(%0.3lf)", nMotionNo + 8, gAlm.dMotionPos[nMotionNo], dCurrentPos);
+		//	strTemp.Format("Motion(%d Axis) ìœ„ì¹˜ë¥¼ Check í•˜ì„¸ìš”.\nì´ì „ìœ„ì¹˜(%0.3lf) != í˜„ì¬ìœ„ì¹˜(%0.3lf)", nMotionNo + 8, gAlm.dMotionPos[nMotionNo], dCurrentPos);
 		//	pLogFile->Save_HandlerLog(strTemp);
 
 		//	pCommon->Show_MsgBox(1, strTemp);		
@@ -208,7 +208,7 @@ UINT CManual_RepeatRunDlg::Thread_ActionRun(LPVOID lpVoid)
 
 void CManual_RepeatRunDlg::Repeat_Action()
 {
-	//index Align Out ÀÌ¾î¾ß ÇÔ - interlock 
+	//index Align Out ì´ì–´ì•¼ í•¨ - interlock 
 	
 	m_strTemp.Format("%d", m_nRepeatCase);
 	m_lblCase.SetWindowText(m_strTemp);
@@ -219,7 +219,7 @@ void CManual_RepeatRunDlg::Repeat_Action()
 		{
 			m_bThreadAction = FALSE;
 			m_pThreadAction = NULL;
-			AfxMessageBox("Index Load ºÎºĞ Align Out ¾Æ´Õ´Ï´Ù");
+			AfxMessageBox("Index Load ë¶€ë¶„ Align Out ì•„ë‹™ë‹ˆë‹¤");
 			return;
 		}
 	}
@@ -230,10 +230,40 @@ void CManual_RepeatRunDlg::Repeat_Action()
 		{
 			m_bThreadAction = FALSE;
 			m_pThreadAction = NULL;
-			AfxMessageBox("Index Unload ºÎºĞ Align Out ¾Æ´Õ´Ï´Ù");
+			AfxMessageBox("Index Unload ë¶€ë¶„ Align Out ì•„ë‹™ë‹ˆë‹¤");
 			return;
 		}
 	}
+
+	if(m_nRepeatCase == 100 && !pCommon->Check_Position(AX_LOAD_PICKER_Z, 0))
+	{
+		m_bThreadAction = FALSE;
+		m_pThreadAction = NULL;
+		AfxMessageBox("Load Picker Z Ready Up ì•„ë‹™ë‹ˆë‹¤.");
+		return;
+	}
+	if(m_nRepeatCase == 200 && !pCommon->Check_Position(AX_LOAD_PICKER_Z, 0))
+	{
+		m_bThreadAction = FALSE;
+		m_pThreadAction = NULL;
+		AfxMessageBox("Load Picker Z Ready Up ì•„ë‹™ë‹ˆë‹¤.");
+		return;
+	}
+	if(m_nRepeatCase == 300 && !pCommon->Check_Position(AX_UNLOAD_PICKER_Z, 0))
+	{
+		m_bThreadAction = FALSE;
+		m_pThreadAction = NULL;
+		AfxMessageBox("Unload Picker Z Ready Up ì•„ë‹™ë‹ˆë‹¤.");
+		return;
+	}
+	if(m_nRepeatCase == 400 && !pCommon->Check_Position(AX_UNLOAD_PICKER_Z, 0))
+	{
+		m_bThreadAction = FALSE;
+		m_pThreadAction = NULL;
+		AfxMessageBox("Unload Picker Z Ready Up ì•„ë‹™ë‹ˆë‹¤.");
+		return;
+	}
+
 
 
 	switch(m_nRepeatCase)
@@ -248,7 +278,7 @@ void CManual_RepeatRunDlg::Repeat_Action()
 		{
 			m_bThreadAction = FALSE;
 			m_pThreadAction = NULL;
-			AfxMessageBox("Load Picker (Tray) Position ¾Æ´Õ´Ï´Ù.");
+			AfxMessageBox("Load Picker (Tray) Position ì•„ë‹™ë‹ˆë‹¤.");
 			return;
 		}
 
@@ -305,7 +335,7 @@ void CManual_RepeatRunDlg::Repeat_Action()
 		{
 			m_bThreadAction = FALSE;
 			m_pThreadAction = NULL;
-			AfxMessageBox("Load Picker (Index) Position ¾Æ´Õ´Ï´Ù.");
+			AfxMessageBox("Load Picker (Index) Position ì•„ë‹™ë‹ˆë‹¤.");
 			return;
 		}
 
@@ -362,7 +392,7 @@ void CManual_RepeatRunDlg::Repeat_Action()
 		{
 			m_bThreadAction = FALSE;
 			m_pThreadAction = NULL;
-			AfxMessageBox("Unload Picker Index (Load) Position ¾Æ´Õ´Ï´Ù.");
+			AfxMessageBox("Unload Picker Index (Load) Position ì•„ë‹™ë‹ˆë‹¤.");
 			return;
 		}
 
@@ -420,7 +450,7 @@ void CManual_RepeatRunDlg::Repeat_Action()
 		{
 			m_bThreadAction = FALSE;
 			m_pThreadAction = NULL;
-			AfxMessageBox("Unload Picker Tray (Unload) Position ¾Æ´Õ´Ï´Ù.");
+			AfxMessageBox("Unload Picker Tray (Unload) Position ì•„ë‹™ë‹ˆë‹¤.");
 			return;
 		}
 		if(pCommon->Check_Position(AX_UNLOAD_PICKER_Z, 0))
