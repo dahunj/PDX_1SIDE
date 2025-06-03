@@ -168,14 +168,8 @@ void CManual_RepeatRunDlg::OnBnClickedChkRepeatRun()
 		m_strTemp.Format("%d", m_nRepeatCase);
 		m_lblCase.SetWindowText(m_strTemp);
 		
-		if (!m_pThreadAction) return;
-		
 		m_bThreadAction = FALSE;
-		WaitForSingleObject(m_pThreadAction->m_hThread, INFINITE);
-
-		
-
-		
+		m_pThreadAction = NULL;		
 	}
 }
 
