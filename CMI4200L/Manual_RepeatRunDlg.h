@@ -60,6 +60,10 @@ protected:
 	static UINT	Thread_ActionRun(LPVOID lpVoid);
 
 public:
+	void AddComboListPicker();
+
+
+public:
 	virtual BOOL OnInitDialog();
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
@@ -67,5 +71,5 @@ public:
 	afx_msg void OnBnClickedChkRepeatRun();
 	afx_msg void OnCbnSelchangeCboPicker();
 	afx_msg void OnCbnSelchangeCboPickNum();
-	afx_msg void OnBnClickedBtnResetcase();
+	
 };

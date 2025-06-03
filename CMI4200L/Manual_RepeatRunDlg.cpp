@@ -44,7 +44,7 @@ BEGIN_MESSAGE_MAP(CManual_RepeatRunDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_CHK_REPEAT_RUN, &CManual_RepeatRunDlg::OnBnClickedChkRepeatRun)
 	ON_CBN_SELCHANGE(IDC_CBO_PICKER, &CManual_RepeatRunDlg::OnCbnSelchangeCboPicker)
 	ON_CBN_SELCHANGE(IDC_CBO_PICK_NUM, &CManual_RepeatRunDlg::OnCbnSelchangeCboPickNum)
-	ON_BN_CLICKED(IDC_BTN_RESETCASE, &CManual_RepeatRunDlg::OnBnClickedBtnResetcase)
+
 END_MESSAGE_MAP()
 
 
@@ -63,13 +63,7 @@ BOOL CManual_RepeatRunDlg::OnInitDialog()
 
 	Initial_Controls();
 
-	m_cboPicker.AddString("Load Picker (Tray)");
-	m_cboPicker.AddString("Load Picker (Index)");
-	/*m_cboPicker.AddString("NG Picker (Index)");
-	m_cboPicker.AddString("NG Picker (Tray)");
-	m_cboPicker.AddString("Good Picker (Index)");*/
-	m_cboPicker.AddString("Unload Picker (Index)");
-	m_cboPicker.AddString("Unload Picker (Tray)");
+	AddComboListPicker();
 	
 	m_nPickerSelected = 0;
 	m_nPickerNumSelected = 0;
@@ -149,16 +143,16 @@ void CManual_RepeatRunDlg::OnBnClickedChkRepeatRun()
 			
 	if (m_chkRepeatRun.GetCheck()) {
 
-		int nMotionNo = pCommon->Check_MotionPos();//Motion Axis shift 
-		if (nMotionNo < 99) 
-		{
-			double dCurrentPos = pAJinAXL->Get_pStatus(nMotionNo)->dPos;		
-			strTemp.Format("Motion(%d Axis) 위치를 Check 하세요.\n이전위치(%0.3lf) != 현재위치(%0.3lf)", nMotionNo + 8, gAlm.dMotionPos[nMotionNo], dCurrentPos);
-			pLogFile->Save_HandlerLog(strTemp);
+		//int nMotionNo = pCommon->Check_MotionPos();//Motion Axis shift 
+		//if (nMotionNo < 99) 
+		//{
+		//	double dCurrentPos = pAJinAXL->Get_pStatus(nMotionNo)->dPos;		
+		//	strTemp.Format("Motion(%d Axis) 위치를 Check 하세요.\n이전위치(%0.3lf) != 현재위치(%0.3lf)", nMotionNo + 8, gAlm.dMotionPos[nMotionNo], dCurrentPos);
+		//	pLogFile->Save_HandlerLog(strTemp);
 
-			pCommon->Show_MsgBox(1, strTemp);		
-			return;
-		}
+		//	pCommon->Show_MsgBox(1, strTemp);		
+		//	return;
+		//}
 		m_nPickerSelect = m_cboPicker.GetCurSel();
 		m_nPickerNum = m_cboPickNum.GetCurSel();
 		m_edtDelay.GetWindowText(strText);
@@ -167,10 +161,34 @@ void CManual_RepeatRunDlg::OnBnClickedChkRepeatRun()
 		m_bThreadAction = TRUE;
 		m_pThreadAction = AfxBeginThread(Thread_ActionRun, this);
 	} else {
+		m_cboPicker.ResetContent();
+		AddComboListPicker();
+
+		m_nRepeatCase = 0;
+		m_strTemp.Format("%d", m_nRepeatCase);
+		m_lblCase.SetWindowText(m_strTemp);
+		
 		if (!m_pThreadAction) return;
+		
 		m_bThreadAction = FALSE;
 		WaitForSingleObject(m_pThreadAction->m_hThread, INFINITE);
+
+		
+
+		
 	}
+}
+
+void CManual_RepeatRunDlg::AddComboListPicker()
+{
+	m_cboPicker.AddString("Load Picker (Tray)");
+		m_cboPicker.AddString("Load Picker (Index)");
+		/*m_cboPicker.AddString("NG Picker (Index)");
+		m_cboPicker.AddString("NG Picker (Tray)");
+		m_cboPicker.AddString("Good Picker (Index)");*/
+		m_cboPicker.AddString("Unload Picker (Index)");
+		m_cboPicker.AddString("Unload Picker (Tray)");
+
 }
 
 
@@ -225,6 +243,15 @@ void CManual_RepeatRunDlg::Repeat_Action()
 		
 	//"Load Picker (Tray)"
 	case 100:
+		if(!pCommon->Check_Position(AX_LOAD_PICKER_Y1, 0)
+			&& !pCommon->Check_Position(AX_LOAD_PICKER_Y1, 1))
+		{
+			m_bThreadAction = FALSE;
+			m_pThreadAction = NULL;
+			AfxMessageBox("Load Picker (Tray) Position 아닙니다.");
+			return;
+		}
+
 		if(pCommon->Check_Position(AX_LOAD_PICKER_Z, 0))
 		{
 			pCommon->Move_Position(AX_LOAD_PICKER_Z, 1); // tray down 
@@ -274,6 +301,14 @@ void CManual_RepeatRunDlg::Repeat_Action()
 
 	//Load Picker (Index)		
 	case 200:
+		if(!pCommon->Check_Position(AX_LOAD_PICKER_Y1, 2))
+		{
+			m_bThreadAction = FALSE;
+			m_pThreadAction = NULL;
+			AfxMessageBox("Load Picker (Index) Position 아닙니다.");
+			return;
+		}
+
 		if(pCommon->Check_Position(AX_LOAD_PICKER_Z, 0))
 		{
 			pCommon->Move_Position(AX_LOAD_PICKER_Z, 3); // Index down 
@@ -323,6 +358,14 @@ void CManual_RepeatRunDlg::Repeat_Action()
 	
 	//"Unload Picker (Index)"		
 	case 300:
+		if(!pCommon->Check_Position(AX_UNLOAD_PICKER_X1, 0))
+		{
+			m_bThreadAction = FALSE;
+			m_pThreadAction = NULL;
+			AfxMessageBox("Unload Picker Index (Load) Position 아닙니다.");
+			return;
+		}
+
 		if(pCommon->Check_Position(AX_UNLOAD_PICKER_Z, 0))
 		{
 			pCommon->Move_Position(AX_UNLOAD_PICKER_Z, 1); // Index down 
@@ -372,6 +415,14 @@ void CManual_RepeatRunDlg::Repeat_Action()
 
 	//"Unload Picker (Tray)"
 	case 400:
+		if(!pCommon->Check_Position(AX_UNLOAD_PICKER_X1, 1) 
+			&& !pCommon->Check_Position(AX_UNLOAD_PICKER_X1, 2))
+		{
+			m_bThreadAction = FALSE;
+			m_pThreadAction = NULL;
+			AfxMessageBox("Unload Picker Tray (Unload) Position 아닙니다.");
+			return;
+		}
 		if(pCommon->Check_Position(AX_UNLOAD_PICKER_Z, 0))
 		{
 			pCommon->Move_Position(AX_UNLOAD_PICKER_Z, 2); // Tray down 
@@ -484,10 +535,4 @@ void CManual_RepeatRunDlg::OnCbnSelchangeCboPickNum()
 }
 
 
-void CManual_RepeatRunDlg::OnBnClickedBtnResetcase()
-{
-	m_nRepeatCase = 0;
-	
-	m_strTemp.Format("%d", m_nRepeatCase);
-	m_lblCase.SetWindowText(m_strTemp);
-}
+
